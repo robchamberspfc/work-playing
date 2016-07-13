@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <title>Office for National Statistics</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href = "css/bootstrap.min.css" rel="stylesheet">
+    <link href = "css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src = "js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://rawgit.com/lukaskral/bootstrap-table/feature_lukaskral_bootstrap_table_filter_integration/dist/bootstrap-table.min.css">
+    <script src="https://rawgit.com/lukaskral/bootstrap-table/feature_lukaskral_bootstrap_table_filter_integration/src/bootstrap-table.js"></script>
+
+  </head>
+
+  <body>
+    <div class="container">
+	    <div class="masthead text-left">
+	        <br>
+	        <p>
+	        <img src="img/ons-logo.svg" width="300px">
+	        </p>
+	    </div>
+	</div>
+    <div class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+	  	<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+			<span class = "icon-bar"> </span>
+			<span class = "icon-bar"> </span>
+			<span class = "icon-bar"> </span>
+		</button>
+		<div class = "collapse navbar-collapse navHeaderCollapse">
+			<ul class = "nav navbar-nav">
+				<li class = "active"> <a href = "#">Home</a></li>
+				<li class = "dropdown">
+					<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Business, Industry and Trade <b class = "caret"></b></a>
+					<ul class = "dropdown-menu">
+						<li> <a href = "#">Business</a></li>
+						<li> <a href = "#">Changes to Business</a></li>
+						<li> <a href = "#">Construction Industry</a></li>
+						<li> <a href = "#">IT and Internet Industry</a></li>
+						<li> <a href = "#">International Trade</a></li>
+						<li> <a href = "#">Manufacturing and Production Industry</a></li>
+						<li> <a href = "#">Retail Industry</a></li>
+						<li> <a href = "#">Tourism Industry</a></li>
+					</ul>
+				</li>
+				<li class = "dropdown">
+					<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Economy <b class = "caret"></b></a>
+					<ul class = "dropdown-menu">
+						<li> <a href = "#">Economic Output and Productivity</a></li>
+						<li> <a href = "#">Environmental Accounts</a></li>
+						<li> <a href = "#">Government, Public Sector and Taxes</a></li>
+						<li> <a href = "#">Investments, Pensions and Trusts</a></li>
+						<li> <a href = "#">Gross Value Added (GVA)</a></li>
+						<li> <a href = "#">National Accounts</a></li>
+						<li> <a href = "#">Inflation and Price Indices</a></li>
+						<li> <a href = "#">Gross Domestic Product (GDP)</a></li>
+						<li> <a href = "#">Regional Accounts</a></li>
+					</ul>
+				</li>
+				<li class = "dropdown">
+					<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Employment and Labour Market <b class = "caret"></b></a>
+					<ul class = "dropdown-menu">
+						<li> <a href = "#">People in work</a></li>
+						<li> <a href = "#">People not in work</a></li>
+						<li> <a href = "#">Public sector personel</a></li>
+					</ul>
+				</li>
+				<li class = "dropdown">
+					<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">People, Population and Community <b class = "caret"></b></a>
+					<ul class = "dropdown-menu">
+						<li> <a href = "#">Subject</a></li>
+						<li> <a href = "#">Subject</a></li>
+						<li> <a href = "#">Subject</a></li>
+						<li> <a href = "#">Subject</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class = "nav navbar-nav navbar-right">
+				<li> <a href = "#">About</a></li>
+			</ul>
+		</div>
+       </div><!--/.navbar-collapse -->
+      </div>
+	
+
+
+		
+		<div class= "panel panel-default">
+		  <div class= "panel panel-heading">
+		    <div class = "container">
+    		<ol class="breadcrumb">
+    		<li><a href="home.html">Home</a></li>
+    		<li><a href="#">People, population and community</a></li>
+    		<li class="active">Population estimates</li>
+    		</ol>
+    		<h1><small>Dataset</small><br>Religion by sex and age, England and Wales</h1>
+		    <div class = "row">
+        		<div class="col-md-1">
+        		    <img src="img/nslogo.png" width="80">
+        		</div>
+        		<div class="col-md-11">
+        		    <p><strong>Release date: 01 Jan 2015  &nbsp;&nbsp;&nbsp;<a href = "#"> View previous versions</a></strong></p>
+        		    <p>Next release: 01 Feb 2015</p>
+        		    <p>Dataset ID: DC2107EW</p>
+        		    <p>Contact: In the future this will display the statistical contact</p>
+        		</div>
+		    </div>
+		  </div>
+		</div>
+		
+		<div class = "panel-body">
+		  <div class = "container">
+            		<p>This dataset provides 2011 Census estimates that classify usual residents of England and Wales by religion, by sex and by age.  The estimates are as at census day, 27 March 2011.</p>
+                <p>The statistics help in developing policy and planning and targetting resources for the population groups who may have a different experience in public service or social interaction, for example employment and education, than other groups.  It also allows public authorities to assess and tackle discrimination and social exclusion associated with religion.</p>
+                
+        <div class="alert alert-warning alert-dismissible" role="alert">
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           <p><strong>Date: </strong> 02 Jan 2015&nbsp;&nbsp;&nbsp;<strong><a href = "#"> View corrected version </a></strong>  </p>
+           <p><strong>Notice: </strong></p>
+
+            <p>Errors have been found in the measurement of output and intermediate consumption in the institutional sectors financial corporations, private non-financial corporations, non-financial corporations and households and non-profit institutions serving households for the period 2008 to 2011.</p>
+            <p>Errors have also been found in other taxes less subsidies on production and gross value added in the institutional sectors financial corporations, private non-financial corporations and non-financial corporations for the period 2010.</p>
+            <p>The following series have been corrected in the United Kingdom National Accounts: The Blue Book, 2013 edition:</p>
+            <p>EACJ, FACQ, FAFA, FAIQ, FAIN, FAIO, FAIS, FAIT, FARP, FARR, FARS, FBXR, FBXS, FDCG, L62W, NHCS, NHCT, NHCV, NHCW, NHCX, NHDB, NHDC, NHJE, NHJN, QWLF, QWLI, QWLJ</p>
+            <p>The corrected series appear in tables:</p>
+            <p>A, 1.7A, 1.7B, 1.7C, 1.7.1, 1.7.2, 3.1.1, 3.1.2, 3.3.1, 3.3.2, 4.1.1, 4.1.2, 4.2.2, 6.1.1</p>
+            <p>These errors do not affect estimates for the UK total economy or net lending / borrowing by sector.</p>
+            <p>ONS apologises for any inconvenience this may cause. For further information please contact <a href = "mailto:gdp@ons.gsi.gov.uk">gdp@ons.gsi.gov.uk</a>
+           
+           </p>
+           <p class="text-right">
+
+           </p>
+        </div>
+		  
+		  </div>
+		</div>
+	</div>
+		
+  <div class = "container">
+			<div class="col-md-9">
+			
+			<p>
+				
+			<div class="panel">
+			  <h2>Your download options</h2>
+			  
+              			  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                          <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <div class = "row">
+        		                      <div class="col-md-2">
+        		                        <h4>2011</h4>
+        		                      </div>
+        		                      <div class="col-md-3">
+                                    <button type="button" class="btn btn-block btn-primary">Download CSV</button>
+                                  </div>
+                                  <div class="col-md-3"><button type="button" class="btn btn-block btn-primary">Download JSON</button>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <h4 class="text-center">
+                                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  customise
+                                      </a>
+                                    </h4>
+                                  </div>
+                               </div>
+                            </div>
+                            
+                          </div>
+                          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                              <div class="panel-body">
+
+                          			    <!-- Button trigger modal -->
+                                      <div class = "row">
+                                        <div class="col-md-2"><h3>Religion</h3> </div>
+                                        <div class="col-md-4"><h3><small><strong>Current selection: </strong>all</small></h3>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#data1">
+                                        Customise
+                                        </button>
+                                        </div>
+                                      </div>
+
+                                      <div class = "row">
+                                      <div class="col-md-2"><h3>Age</h3> </div>
+                                        <div class="col-md-4"><h3><small><strong>Current selection: </strong>all</small></h3>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#data2">
+                                        Customise
+                                        </button>
+                                        </div>
+                                      </div>
+
+                                      <div class = "row">
+                                      <div class="col-md-2">
+                                        <h3>Sex</h3>
+                                      </div>
+                                        <div class="col-md-4"><h3><small><strong>Current selection: </strong>customised</small></h3>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#data3">
+                                        Customise
+                                        </button>
+                                        </div>
+                                      </div>
+                                      <hr>
+                                      <div class ="row">
+                                        <div class="col-md-4"><button type="button" class="btn btn-block btn-primary" data-dismiss="modal">Download customised CSV</button>
+                                        </div>
+                                        <div class="col-md-4">  <button type="button" class="btn btn-block btn-primary" data-dismiss="modal">Download customised JSON</button>
+                                        </div>
+                                        <div class="col-md-4">  <button type="button" class="btn btn-block btn-primary" data-dismiss="modal">Download customised XLS</button>
+                                        </div>
+                                      </div>
+                                      <br>
+                                      <div class ="row">
+                                        <h4 class = "text-center">
+                                          <a href = "#">Bookmark selection</a>
+                                        </h4>
+                                      </div>
+                          			      <hr>
+
+                                      			  <!-- Modal -->
+                                      <div class="modal fade" id="data1" role="dialog">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                      
+                                            <div class="modal-body">
+                                      
+                                            <h3>Variable:  Religion</h3>
+                                            <table class="table table-striped" data-toggle="table" data-search="true" data-pagination="true">
+                                              <col width="50px">
+                                            <thead>
+                                            <tr>
+                                                <th data-field="id"><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox" checked> Select all
+                                                  </label>
+                                                </div></div></form></th>
+                                                <th data-field="name">Item Name</th>
+                                            </tr>
+                                            </thead>
+                                                        <tbody>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Christian </td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>No religion</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Islam</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Judaism</td>
+                                          </tr>
+                                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Buddhism</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Hinduism</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Gnosticism</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Sikhism</td>
+                                          </tr>
+                                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Paganism</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Rastafari</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Mormonism</td>
+                                          </tr>
+                                          <tr>
+                                               <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Spiritualism</td>
+                                          </tr>
+                                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Unitarianism</td>
+                                          </tr>
+                                          <tr>
+                                               <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Jedi</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Jainism</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Jehovah's Witnesses</td>
+                                          </tr>
+                                      </tbody>
+                                        </table>
+                                            
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                              <button type="button" class="btn btn-primary" data-dismiss="modal">Select</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      			  <!-- Modal -->
+                                      <div class="modal fade" id="data2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                      
+                                            <div class="modal-body">
+                                      
+                                            <h3>Variable:  Age</h3>
+                                            <table class="table table-striped" data-toggle="table" data-search="true" data-pagination="true">
+                                            <col width="50px">
+                                            <thead>
+                                            <tr>
+                                                <th data-field="id"><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox" checked> Select all
+                                                  </label>
+                                                </div></div></form></th>
+                                                <th data-field="name">Item Name</th>
+                                            </tr>
+                                            </thead>
+                                                        <tbody>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>0 to 6</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>7 to 13</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>14 to 20</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>21 to 27</td>
+                                          </tr>
+                                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>28 to 34</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>35 to 41</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>42 to 48</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>49 to 55</td>
+                                          </tr>
+                                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>56 to 62</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>63 to 69</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>70 to 76</td>
+                                          </tr>
+                                          <tr>
+                                               <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>77 to 83</td>
+                                          </tr>
+                                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>84 to 90</td>
+                                          </tr>
+                                          <tr>
+                                               <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>91 +</td>
+                                          </tr>
+                                      </tbody>
+                                        </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                              <button type="button" class="btn btn-primary" data-dismiss="modal">Select</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      			  <!-- Modal -->
+                                      <div class="modal fade" id="data3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                      
+                                            <div class="modal-body">
+                                            <h3>Variable:  Sex</h3>
+                                            <table class="table table-striped" data-toggle="table" data-search="true" data-pagination="true">
+                                              <col width="50px">
+                                            <thead>
+                                            <tr>
+                                                <th data-field="id"><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox"> Select all
+                                                  </label>
+                                                </div></div></form></th>
+                                                <th data-field="name">Item Name</th>
+                                            </tr>
+                                            </thead>
+                                                        <tbody>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox">
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Female</td>
+                                          </tr>
+                                          <tr>
+                                              <td><form class="form-inline">
+                                                <div class="form-group">
+                                                <div class="checkbox">
+                                                  <label>
+                                                    <input type="checkbox" checked>
+                                                  </label>
+                                                </div></div></form></td>
+                                              <td>Male</td>
+                                          </tr>
+                                      </tbody>
+                                        </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                              <button type="button" class="btn btn-primary" data-dismiss="modal">Select</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      
+                              </div>
+                              
+                            </div>
+                          </div>
+                         
+                          <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                                <div class = "row">
+        		                      <div class="col-md-2">
+        		                        <h4>2001</h4>
+        		                      </div>
+        		                      <div class="col-md-5">
+                                    <button type="button" class="btn btn-block btn-primary">Download XLS</button>
+                                  </div>
+                                  <div class="col-md-5"><button type="button" class="btn btn-block btn-primary">Download CSV</button>
+                                  </div>
+
+                                
+                  </div>
+                </div>
+              </div>
+                                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                                <div class = "row">
+        		                      <div class="col-md-2">
+        		                        <h4>1991</h4>
+        		                      </div>
+        		                      <div class="col-md-10">
+                                    <button type="button" class="btn btn-block btn-primary">Download XLS</button>
+                                  </div>
+
+                                
+                  </div>
+                </div>
+              </div>
+              <h2>Important information and usage options</h2>
+			    </div>
+		    </div>
+
+	
+			<div class="col-md-3">
+			      <div class = "row">
+				      <div class = "panel panel-default">
+          				<div class = "panel panel-heading">
+            				<h4 class="panel-title" >Related bulletins</h4>
+				        </div>
+				          <div class = "panel panel-body">
+            				xxx
+            				<br>xxx
+            				<br>xxx
+            				<br>xxx
+            				</div>
+			        </div>
+			      </div>
+			      <div class = "row">
+				      <div class = "panel panel-default">
+          				<div class = "panel panel-heading">
+            				<h4 class="panel-title" >Contacts</h4>
+				        </div>
+				          <div class = "panel panel-body">
+            				xxx
+            				<br>xxx
+            				<br>xxx
+            				<br>xxx
+            				</div>
+			        </div>
+			    </div>
+		    </div>
+	</div><!-- /container -->
+		<div class = "panel panel-default">
+		  <div class = "panel panel-heading">
+			  <h2 class="panel-title"> Footer </h2>
+		  </div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    
+  </body>
+</html>

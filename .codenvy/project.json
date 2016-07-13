@@ -1,0 +1,1 @@
+{"runners":{"configs":{},"default":"system:/java/web/tomcat7"},"builders":{"configs":{}},"mixinTypes":["contribution"],"type":"BasicJS","attributes":{"framework":["BasicJS"],"language":["javascript"]}}
