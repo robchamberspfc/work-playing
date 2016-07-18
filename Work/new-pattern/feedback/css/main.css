@@ -22,12 +22,12 @@
 }
 
 .modalDialog > div {
-	width: 50%;
+	width: 450px;
 	position: relative;
 	margin: 5% auto;
 	padding: 5px 20px 13px 20px;
 	/*border-radius: 10px;*/
-	background: #fff;
+	background: #EAEAEA;
 	/*background: -moz-linear-gradient(#fff, #999);*/
 	/*background: -webkit-linear-gradient(#fff, #999);*/
 	/*background: -o-linear-gradient(#fff, #999);*/
@@ -64,3 +64,6 @@ textarea {
   height: 150px
 }
   
+.right {
+  float: right;
+}

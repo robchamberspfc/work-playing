@@ -181,24 +181,29 @@
      	<div id="openModal" class="modalDialog">
                  <div>
                         <div>
-        							<div>
                               <h3>Feedback</h3>
-                              <h4>Did you find what you were looking for?
-                               <form align = "right">
-                                 <input type = "radio" name = "yes">Yes
-                                 <input type = "radio" name = "yes">No
-                               </form>
+                              <h4>
+                               <form>
+                                 Did you find what you were looking for?
+                                 <span class = "right">
+                                 	<input type = "radio" name = "yes">Yes
+                                	 	<input type = "radio" name = "yes">No
+                               	</span>
+                                 </form>
                               </h4>
-                               <h4>Was the site easy to understand?
-                              <form align = "right">
+                               <h4>
+                              <form>
+                                Was the site easy to understand?
+                                <span class = "right">
                                  <input type = "radio" name = "yes">Yes
                                  <input type = "radio" name = "yes">No
+                                </span>
                                </form>
                              </h4>
                              <hr>
                              <h4>
                                <form>
-                                 Email <input type = "email" name = "email">
+                                 Email address<input type = "email" name = "email">
                                </form>
                              </h4>
                              <h4>
@@ -206,19 +211,21 @@
                               <form >
                                 <textarea name = "feedback" ></textarea>
                                </form>
-                             </h4>
-                           </div>
+                               </h4>
+                          		<p>
+										<button class="btn btn--secondary" >
+    										<a href="#close" style="color: white;">Close</a>
+										</button>
+
+                              <button class="btn btn--primary right">
+    										<a href="#close" style="color: white;">Send feedback</a>
+										</button>
+
+
+                                
+                          		</p>                             
    						 </div>
-                      <div class="col-wrap">
-                          <div class="col col--md-offset-16 col--lg-offset-25 col--md-25 col--lg-15">
-                              <button class="btn btn--secondary">
-    										<a href="#close">Close</a>
-										</button>
-                         		<button class="btn btn--primary">
-    										<a href="#close">Send feedback</a>
-										</button>
-                          </div>
-                      </div>
+
                 </div>
        </div>
 
