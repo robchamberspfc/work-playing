@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <title>Office for National Statistics</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" type="text/css" href="https://onsdigital.github.io/ons-pattern-library-starter/sixteens/css/old-ie.css">
+    <![endif]-->
+    <!--[if IE 9]>
+    <link rel="stylesheet" type="text/css" href="https://onsdigital.github.io/ons-pattern-library-starter/sixteens/css/ie-9.css">
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.ons.gov.uk/sixteens/1f354a7/css/main.css">
+	<![endif]-->
+  <script src="https://www.ons.gov.uk/visualisations/dvc364/lib/jquery.js" type="text/javascript"></script>
+  <script src="https://www.ons.gov.uk/visualisations/dvc364/lib/d3.v4.min.js" type="text/javascript"></script>
+  <script src="https://www.ons.gov.uk/visualisations/dvc364/lib/modernizr.svg.min.js" type="text/javascript"></script>
+  <script src="https://www.ons.gov.uk/visualisations/dvc364/lib/pym.js" type="text/javascript"></script>
+
+
+  </head>
+
+  <body>
+      <nav>
+       <div class="wrapper">
+          <div class="header col-wrap">
+             <div class="col col--lg-one-third col--md-one-third">
+                <a href="https://www.ons.gov.uk/">
+                   <img class="logo" src="https://cdn.ons.gov.uk/assets/images/ons-logo/v1/ons-logo.svg" alt="Office for National Statistics">
+                </a>
+             </div>
+             <div class="col col--lg-two-thirds col--md-two-thirds print--hide">&nbsp;</div>
+             <nav class="secondary-nav col col--lg-two-thirds col--md-two-thirds print--hide">
+                <ul class="secondary-nav__list">
+                   <li class="secondary-nav__item">
+                      <a class="secondary-nav__link" href="https://www.ons.gov.uk/methodology">Methodology</a>
+                   </li>
+                   <li class="secondary-nav__item">
+                      <a class="secondary-nav__link" href="https://www.ons.gov.uk/aboutus">
+                         About
+                      </a>
+                   </li>
+                </ul>
+             </nav>
+          </div>
+       </div>
+    </nav>
+    	<div class="primary-nav print--hide">
+       <nav>
+          <ul class="nav--controls">
+             <li class="nav--controls__item">
+                <a href="#nav-primary" id="menu-toggle" aria-controls="nav-primary" class="nav--controls__menu">
+                   <span class="nav--controls__text">Menu</span>
+                </a>
+             </li>
+             <li class="nav--controls__item ">
+                <a href="#nav-search" id="search-toggle" aria-controls="nav-search" class="nav--controls__search">
+                   <span class="nav--controls__text">Search</span>
+                </a>
+             </li>
+          </ul>
+          <div class="wrapper nav-main--hidden" id="nav-primary">
+             <ul class="primary-nav__list">
+                <li class="primary-nav__item js-nav hide--mobile old-ie--display-block"><a class="primary-nav__link col col--md-7 col--lg-9" href="https://www.ons.gov.uk/">Home</a></li>
+                <li class="primary-nav__item js-nav js-expandable ">
+                   <a class="primary-nav__link col col--md-8 col--lg-10" href="https://www.ons.gov.uk/businessindustryandtrade" aria-haspopup="true">Business, industry and trade</a>
+                   <ul class="primary-nav__child-list col col--md-16 col--lg-20 js-expandable__content js-nav-hidden jsEnhance" aria-expanded="false" aria-label="submenu">
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/businessindustryandtrade/business" >Business</a>
+                      </li>
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/businessindustryandtrade/changestobusiness" >Changes to business</a>
+                      </li>
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/businessindustryandtrade/constructionindustry" >Construction industry</a>
+                      </li>
+                   </ul>
+                </li>
+                <li class="primary-nav__item js-nav js-expandable ">
+                   <a class="primary-nav__link col col--md-8 col--lg-10" href="https://www.ons.gov.uk/economy" aria-haspopup="true">Economy</a>
+                   <ul class="primary-nav__child-list col col--md-16 col--lg-20 js-expandable__content js-nav-hidden jsEnhance" aria-expanded="false" aria-label="submenu">
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/economy/economicoutputandproductivity" >Economic output and productivity</a>
+                      </li>
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/economy/environmentalaccounts" >Environmental accounts</a>
+                      </li>
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes" >Government, public sector and taxes</a>
+                      </li>
+                   </ul>
+                </li>
+                <li class="primary-nav__item js-nav js-expandable ">
+                   <a class="primary-nav__link col col--md-8 col--lg-10" href="https://www.ons.gov.uk/employmentandlabourmarket" aria-haspopup="true">Employment and labour market</a>
+                   <ul class="primary-nav__child-list col col--md-16 col--lg-20 js-expandable__content js-nav-hidden jsEnhance" aria-expanded="false" aria-label="submenu">
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork" >People in work</a>
+                      </li>
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork" >People not in work</a>
+                      </li>
+                   </ul>
+                </li>
+                <li class="primary-nav__item js-nav js-expandable ">
+                   <a class="primary-nav__link col col--md-8 col--lg-10" href="https://www.ons.gov.uk/peoplepopulationandcommunity" aria-haspopup="true">People, population and community</a>
+                   <ul class="primary-nav__child-list col col--md-16 col--lg-20 js-expandable__content js-nav-hidden jsEnhance" aria-expanded="false" aria-label="submenu">
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages" >Births, deaths and marriages</a>
+                      </li>
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/peoplepopulationandcommunity/community" >Community</a>
+                      </li>
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice" >Crime and justice</a>
+                      </li>
+                      <li class="primary-nav__child-item  js-expandable__child">
+                         <a class="primary-nav__child-link" tabindex="-1" href="https://www.ons.gov.uk/peoplepopulationandcommunity/culturalidentity" >Cultural identity</a>
+                      </li>
+                   </ul>
+                </li>
+                <li class="primary-nav__item  js-nav">
+                   <a class="primary-nav__link  col col--md-8 col--lg-10" href="https://www.ons.gov.uk/surveys">
+                      Taking part in a survey?
+                   </a>
+                </li>
+             </ul>
+          </div>
+       </nav>
+    </div>
+    	<div class="search nav-search--hidden print--hide" id="searchBar">
+       <div class="wrapper" role="search">
+          <form class="col-wrap search__form" action="https://www.ons.gov.uk/search">
+             <label class="search__label col col--md-23 col--lg-24" for="nav-search">
+                Search for a keyword(s) or time series ID
+             </label>
+             <input type="search" autocomplete="off" class="search__input col col--md-21 col--lg-32" id="nav-search" name="q" value="">
+             <button type="submit" class="search__button col--md-3 col--lg-3" id="nav-search-submit">
+                <span class="visuallyhidden">Search</span>
+                <span class="icon icon-search--light"></span>
+             </button>
+          </form>
+       </div>
+    </div>
+
+    <div class="page-intro background--gallery">
+	<div class="wrapper">
+		<div class="col-wrap">
+			<div class="col">
+				<nav>
+				    <div class="breadcrumb print--hide">
+                        <ol class="breadcrumb__list">
+                            <li class="breadcrumb__item">
+                                <a class="breadcrumb__link" href="https://www.ons.gov.uk/">
+                                    Home
+                                </a>
+                              </li>
+                              <li class="breadcrumb__item">
+                                <a class="breadcrumb__link" href="https://www.ons.gov.uk/peoplepopulationandcommunity">
+                                  People, population and community
+                                </a>
+                              </li>
+                              <li class="breadcrumb__item">
+                                <a class="breadcrumb__link" href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing">
+                                  Well-being
+                                </a>
+                              </li>
+                              <li class="breadcrumb__item" href="/">
+                                  Visualisations
+                              </li>
+                        </ol>
+                    </div>
+            				</nav>
+            				<div class="col col--md-47 col--lg-48">
+            					<h1 class="page-intro__title ">
+            						Measures of National Well-being
+            					</h1>
+            					<p class="page-intro__content">
+            						Monitors and reports how the UK is doing by producing accepted and trusted measures for the different areas of life that matter most to the UK public.
+            					</p>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+              <div class='alert'>
+                <div class = "wrapper">
+                  <div class="col-wrap">
+                      <div class="col">
+                        <p>This dashboard will act as a live product, with some indicators being automatically updated. We are also looking to update data in this dashboard more frequently by updating indicators as and when new data are available.</p>
+                        <p>For more information, or to provide feedback on the dashboard please contact: <a class "alert__link" href="mailto:qualityoflife@ons.gov.uk">qualityoflife@ons.gsi.gov.uk</a></p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+              <div class = "wrapper">
+                  <div class="dashboard">
+                  <div class="row introText">
+                  <div class=" col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                  <p> The dashboard provides a visual overview of the data and can be explored by the areas of life (domains) or by the direction of change. It supports the <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/articles/measuringnationalwellbeing/apr2017">Measuring National Well-being programme</a> which provides a more detailed look at life in the UK</p>
+                  <p> We assess change over a short term (1 year) and long term (3 year) basis. Change is assessed over a 1 year basis in the dashboard below, however trend information can be found below in the graphs for each indicator. </p>
+                  <p> The latest update provides a broadly positive picture of life in the UK, with the majority of indicators either improving or staying the same over the 1 year period. Areas of life that are improving include: satisfaction with our jobs, health and leisure time. Two areas deteriorated over the 1 year – the proportion reporting very low anxiety, and waste from households that is recycled. </p>
+                  </div>
+                  <div class="col-lg-4 col-lg-offset-0  col-md-5 col-md-offset-0 col-sm-offset-1  col-sm-10 col-xs-12 col-xs-offset-0">
+                  <img id="AoC" src="https://www.ons.gov.uk/visualisations/dvc364/dashboard/images/AoC.png"></img>
+                  </div>
+                  </div>
+                  <div class="row introText no_padding">
+                  <p>View by indicator of change: </p>
+                  <ul class="indicators-filter">
+                  <li> <a class="allIndicators highlighted" href="#section1" data-filter=".indicatorPanel" style="opacity:1; border-bottom: 5px solid #EBECED;"><img style="margin-right:5px;" src="https://www.ons.gov.uk/visualisations/dvc364/dashboard/images/all.svg"><span>All indicators (43) </span></a></li>
+                  <li> <a class="" href="#section3" data-filter=".up" style="opacity:0.9; border-bottom: 5px solid #EBECED;"><img style="margin-right:5px;" src="https://www.ons.gov.uk/visualisations/dvc364/dashboard/images/positive.svg"><span>Positive Change (15) </span></a></li>
+                  <li><a class="" href="#section1" data-filter=".down" style="opacity:0.9; border-bottom: 5px solid #EBECED;"><img style="margin-right:5px;" src="https://www.ons.gov.uk/visualisations/dvc364/dashboard/images/negative.svg"><span>Negative Change (2) </span></a></li>
+                  <li><a class="" href="#section1" data-filter=".no" style="opacity:0.9; border-bottom: 5px solid #EBECED;"><img style="margin-right:5px;" src="https://www.ons.gov.uk/visualisations/dvc364/dashboard/images/nochange.svg"><span>No Change (18) </span></a></li>
+                  <li><a class="" href="#section1" data-filter=".null" style="opacity:0.9; border-bottom: 5px solid #EBECED;"><img style="margin-right:5px;" src="https://www.ons.gov.uk/visualisations/dvc364/dashboard/images/null.svg"><span>Not assessed (8) </span></a></li>
+                  </ul>
+                  </div>
+                  <hr>
+                  <div class="introText">
+                  <p>View by domain: </p>
+                  <ul class="measures-filter ">
+                  <li><a class="allMeasures highlighted" href="#section1" data-filter=".topic" style="opacity:1; border-bottom: 5px solid #003D59;"><span>All</span></a></li>
+                  <li><a class="" href="#section1" data-filter=".perwel" style="background-color:#365E94; opacity:0.9; border-bottom: 5px solid #365E94;"><span>Personal Well-being</span></a></li>
+                  <li><a class="" href="#section2" data-filter=".relati" style="background-color:#CE3F6D; opacity:0.9; border-bottom: 5px solid #CE3F6D;"><span>Our Relationships</span></a></li>
+                  <li><a class="" href="#section3" data-filter=".health" style="background-color:#6E4A75; opacity:0.9; border-bottom: 5px solid #6E4A75;"><span>Health</span></a></li>
+                  <li><a class="" href="#section4" data-filter=".whwedo" style="background-color:#5F7682; opacity:0.5; border-bottom: 5px solid #5F7682;"><span>What we do</span></a></li>
+                  <li><a class="" href="#section5" data-filter=".whlive" style="background-color:#507D3A; opacity:0.5; border-bottom: 5px solid #507D3A;"><span>Where we live</span></a></li>
+                  <li><a class="" href="#section6" data-filter=".perfin" style="background-color:#3A73A9; opacity:0.5; border-bottom: 5px solid #3A73A9;"><span>Personal Finance</span></a></li>
+                  <li><a class="" href="#section7" data-filter=".econom" style="background-color:#FF5F00; opacity:0.5; border-bottom: 5px solid #FF5F00;"><span>Economy</span></a></li>
+                  <li><a class="" href="#section8" data-filter=".eduski" style="background-color:#388AA8; opacity:0.5; border-bottom: 5px solid #388AA8;"><span>Education and Skills</span></a></li>
+                  <li><a class="" href="#section9" data-filter=".govern" style="background-color:#497D44; opacity:0.5;border-bottom: 5px solid #497D44;"><span>Governance</span></a></li>
+                  <li><a class="" href="#section10" data-filter=".enviro" style="background-color:#E54A31; opacity:0.5;border-bottom: 5px solid #E54A31;"><span>Environment</span></a></li>
+                  </ul>
+                  </div>
+              </div>
+           </div>
+
+
+
+
+    	<footer class="print--hide">
+    <h2 class="visuallyhidden">Footer links</h2>
+        <div class="footer">
+            <div class="wrapper">
+                <nav>
+                    <div class="footer-nav col-wrap">
+                        <div class="col col--lg-one-third col--md-one-third">
+                            <h3 class="footer-nav__heading">Help</h3>
+                            <ul class="footer-nav__list">
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/help/accessibility">Accessibility</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/help/cookiesandprivacy">Cookies and privacy</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/help/termsandconditions">Terms and conditions</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col col--lg-one-third col--md-one-third">
+                            <h3 class="footer-nav__heading">About ONS</h3>
+                            <ul class="footer-nav__list">
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/aboutus/whatwedo">What we do</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/aboutus/careers">Careers</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/aboutus/contactus">Contact us</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/news">News</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/aboutus/transparencyandgovernance/freedomofinformationfoi">Freedom of Information</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col col--lg-one-third col--md-one-third">
+                            <h3 class="footer-nav__heading">Connect with us</h3>
+                            <ul class="footer-nav__list">
+                                <li class="footer-nav__item">
+                                    <a href="https://twitter.com/ONS" class="icon--hide">Twitter</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.facebook.com/ONS" class="icon--hide">Facebook</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.linkedin.com/company/office-for-national-statistics" class="icon--hide">LinkedIn</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://public.govdelivery.com/accounts/UKONS/subscribers/new" class="icon--hide">Email alerts</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="wrapper">
+                <div class="footer-license">
+                    <img class="footer-license__img" alt="OGL" width="60" src="https://www.ons.gov.uk/img/ogl.png">
+                    <p class="footer-license__text margin-left-sm--0">
+                        All content is available under the <a class="icon--hide" href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a> <span class="icon icon-external--light-small"></span>, except where otherwise stated
+                </p>
+            </div>
+        </div>
+    </div>
+ </footer>
+  </body>
+
+  <script src="https://onsdigital.github.io/ons-pattern-library-starter/sixteens/js/main.js"> </script>
+  <script>
+		var window_width = $(window).width();
+		var dvc ={};
+		var pymChild = null;
+	//	var dateFormat = "%Y";
+
+		//specify colours for each topic
+		//var wb_colours = ["#5454C9", "#AA74CC", "#AD3C39", "#D95F99", "#D1B900", "#A0B844", "#00B3AB", "#E28600", "#3584B8", "#298C45"]
+
+		//create structure- rows and columns
+		function createStructure(){
+
+
+			d3.selectAll(".title_div").selectAll("*").remove();
+			d3.selectAll(".container-fluid").selectAll("*").remove();
+			d3.selectAll(".explainer").remove();
+
+			var nested_data = d3.nest()
+				  .key(function(d) { return d.topic_code;})
+				  .entries(dvc.config);
+
+
+
+
+			dvc.topics =[];
+			dvc.measures = [];
+			dvc.ons_urls = [];
+			dvc.data_start = [];
+			dvc.period = [];
+			dvc.colour=[];
+            dvc.filter=[];
+			dvc.change1 =[]
+
+			nested_data.forEach(function(d,i) {
+				dvc.topics.push(d.key);
+			});
+
+			dvc.config.forEach(function(d,i) {
+				dvc.measures.push(d.measure_code);
+			});
+
+			dvc.config.forEach(function(d,i) {
+				dvc.ons_urls.push(d.url);
+			});
+
+			dvc.config.forEach(function(d,i) {
+				dvc.data_start.push(d.data_start);
+			});
+
+			dvc.config.forEach(function(d,i) {
+				dvc.period.push(d.period);
+			});
+
+			dvc.config.forEach(function(d,i) {
+				dvc.colour.push(d.colour);
+			});
+
+            dvc.config.forEach(function(d,i) {
+				dvc.filter.push(d.filter);
+			});
+
+			dvc.config.forEach(function(d,i) {
+				dvc.change1.push(d.change1);
+			});
+
+
+
+
+			topic_row = d3.select(".container-fluid")
+				.selectAll("div")
+				.data(nested_data)
+				.enter()
+          	    .append("div")
+				.attr("class", function(d){ return "row topic "+d.key; })
+				//.style("fill", function(d){console.log(d.values[0].color); return "10px solid "+d.values[0].color})
+
+
+
+
+			summary = topic_row.append("div")
+				.attr("class", "summary")
+
+
+
+			summary.append("div")
+				.attr("class", "topic_title")
+				.style("color", function(d){
+								return d.values[0].color
+							})
+				.html(function(d){ return d.values[0].topic; })
+
+			summary.append("div")
+				.attr("class", "topic_text")
+				.html(function(d){ return d.values[0].topic_text; })
+
+//            summary.append("div")
+//				.attr("class", "topic_text")
+//				.html(function(d){ return d.values[0].status; })
+
+
+
+			topic_row.append("div")
+				.attr("class", "measures")
+				.each(function(d, i){
+
+
+
+						d3.select(this).selectAll("div")
+							.data(d.values)
+							.enter()
+
+
+
+
+                            .append("div")
+							.attr("class", function(d){
+								return "col-xs-12 col-sm-6 col-md-4 col-lg-3 indicatorPanel " + d.change1;
+							})
+							.attr("id", function(d){
+								return d.measure_code;
+							})
+							.append("div")
+							.attr("class", "panel panel-default")
+							.append("div")
+
+							.style("background", function(d){
+//								return d.color
+							})
+
+
+					})
+
+//		d3.selectAll(".panel").append("div")
+//				.attr("class", "status")
+//            .html (function(d){
+//								return d.status;
+//                                })
+
+
+            d3.selectAll(".panel").append("div")
+				.attr("class", "card")
+            .style("border-bottom-color", function(d){
+								return d.color
+                                })
+
+
+				.append("div")
+				.attr("class", "measure_title")
+                .append("div")
+            	.attr("class", "title_div")
+
+
+
+
+           d3.selectAll(".card")
+				.append("div")
+				.attr("class", "status")
+				.append("text")
+				.html(function(d){
+					if(d.change1=="up"){
+						return '<img src="https://www.ons.gov.uk/visualisations/dvc364/images/images/positive.svg">';
+					} else if (d.change1=="down"){
+						return '<img src="https://www.ons.gov.uk/visualisations/dvc364/images/images/negative.svg">';
+					} else if(d.change1=="no"){
+						return '<img src="https://www.ons.gov.uk/visualisations/dvc364/images/images/nochange.svg">';
+					} else {
+						return '<img src="https://www.ons.gov.uk/visualisations/dvc364/images/images/null.svg">';
+					}
+				})
+
+
+			d3.selectAll(".card")
+				.append("div")
+				.attr("class", "graphic")
+
+
+
+
+			d3.selectAll(".card")
+				.append("div")
+				.attr("class", "explainer")
+				.append("text")
+				.html(function(d){
+					return d.text;
+				})
+
+
+			j= 0;
+
+			parseStartTime = d3.timeParse("%Y, %m, %d");
+
+			loadData();
+
+			function loadData(){
+
+				//console.log(dvc.ons_urls[j])
+				if(dvc.ons_urls[j]=="none"){
+					filepth = "/data/" + dvc.measures[j].toLowerCase()+".json";
+				} else if(dvc.ons_urls[j]=="bigNo"){
+					filepth = '/data/' + dvc.measures[j].toLowerCase()+".json";
+				} else if(dvc.ons_urls[j]=="hbar"||dvc.ons_urls[j]=="vbar"){
+					filepth = '/data/' + dvc.measures[j].toLowerCase()+".json";
+				}  else {
+					filepth = dvc.ons_urls[j];
+				}
+
+				d3.json(filepth, function(json)	{
+							chartData=json;
+				//console.log(filepth)
+				//console.log(chartData)
+							if(dvc.ons_urls[j]=="none"){
+								startDate = parseStartTime(dvc.config[j].data_start);
+								chartData[dvc.period[j]].catLabels.forEach(function(d,i) {
+
+									if(dvc.period[j]=="days"){
+										parseTime = d3.timeParse("%d-%b-%Y")
+									} else if(dvc.period[j]=="months"){
+										parseTime = d3.timeParse("%Y %b")
+									} else if (dvc.period[j]=="years") {
+										parseTime = d3.timeParse("%Y")
+									} else if (dvc.period[j] == "quarters"){
+										parseTime = d3.timeParse("%Y %b")
+									}
+
+									date = parseTime(d);
+									chartData[dvc.period[j]].catLabels[i] = parseTime(d);
+
+//									console.log(chartData[dvc.period[j]].dataValues[i]);
+//
+//									if (chartData[dvc.period[j]].dataValues[i] != null){
+//										chartData[dvc.period[j]].dataValues[i] =parseFloat(chartData[dvc.period[j]].dataValues[i])
+//									} else {
+//
+//										chartData[dvc.period[j]].dataValues[i]=null
+//									};
+//									console.log(chartData[dvc.period[j]].dataValues);
+
+								})
+							 } else if (dvc.ons_urls[j]=="bigNo"){
+
+							 } else if (dvc.ons_urls[j]=="hbar"||dvc.ons_urls[j]=="vbar"){
+
+							 } else {
+
+								startDate = parseStartTime(dvc.config[j].data_start);
+
+								chartData[dvc.period[j]].catLabels =[];
+								chartData[dvc.period[j]].dataValues =[];
+
+								chartData[dvc.period[j]].forEach( function(d,i){
+
+										if(dvc.period[j]=="days"){
+											parseTime = d3.timeParse("%d-%b-%Y")
+										} else if (dvc.period[j]=="months"){
+											parseTime = d3.timeParse("%Y %b")
+										} else if (dvc.period[j]=="years") {
+											parseTime = d3.timeParse("%Y")
+										} else if (dvc.period[j] == "quarters"){
+											parseTime = d3.timeParse("%Y %b")
+											d.date = d.date.replace("Q1", "JAN")
+											d.date = d.date.replace("Q2", "APR")
+											d.date = d.date.replace("Q3", "JUL")
+											d.date = d.date.replace("Q4", "OCT")
+										}
+
+										d.date = parseTime(d.date);
+
+
+										if(d.date>= startDate) {
+											chartData[dvc.period[j]].catLabels.push(d.date)
+											chartData[dvc.period[j]].dataValues.push(+d.value)
+										}
+
+
+								})
+
+
+							}
+
+
+							getDimensions();
+
+							if(dvc.config[j].graphic == "line"){
+									drawLineChart();
+							} else if (dvc.config[j].graphic == "bigNo"){
+									drawBigNo();
+							} else if (dvc.config[j].graphic == "vbar"){
+									drawVerticalBarChart();
+							} else if (dvc.config[j].graphic == "hbar"){
+									drawHorizontalBarChart();
+							}
+
+						j++;
+					if(j<dvc.config.length){ loadData(); }
+
+
+				});//end json load
+
+			}//end loadData()
+	} //end of createStructure()
+
+	function getDimensions(){
+		 margin = {top:+dvc.config[j].margin_t, right:+dvc.config[j].margin_r, bottom:+dvc.config[j].margin_b, left: +dvc.config[j].margin_l};
+		 chart_width = parseInt(d3.select('.graphic').style("width")) - margin.left - margin.right;
+		 if(chart_width>200){
+			 aspectRatio = [5,5];
+		} else {
+		 	aspectRatio = [5,7];
+		}
+		 height = Math.ceil((chart_width * aspectRatio[1]) / aspectRatio[0]) - margin.top - margin.bottom;
+	}
+
+
+	function drawLineChart(){
+
+			//console.log(dvc.config[j].link_to)
+		d3.select('#'+dvc.measures[j]).select(".title_div").append("h2").attr("class", "measure_caption").text(dvc.config[j].measure);
+		d3.select('#'+dvc.measures[j]).select(".measure_title")
+			.append("div")
+			.attr("class", "subtitle")
+			.append("a")
+			.attr("href", dvc.config[j].link_to)
+			.attr("target", "_blank")
+			.html(chartData.description.title)
+
+//			d3.select('#'+dvc.measures[j])
+//					.select(".measure_title")
+//					.append("text")
+//					.html(function(){
+//						if(dvc.config[j].rolling != "none"){
+//							return ", "+dvc.config[j].rolling
+//						}
+//					});
+
+
+//		x = d3.scalePoint()
+//			.range([0,chart_width])
+//			//.domain([50,70])
+//			.domain(chartData.catLabels)
+
+		if(dvc.config[j].ymin =="auto"){
+			minyVal=d3.min(chartData[dvc.period[j]].dataValues)
+		} else {
+			minyVal= +dvc.config[j].ymin
+		}
+
+
+		if(dvc.config[j].ymax =="auto"){
+			maxyVal=d3.max(chartData[dvc.period[j]].dataValues)
+		} else {
+			maxyVal= +dvc.config[j].ymax
+		}
+
+		x = d3.scaleTime()
+			.range([0, chart_width])
+			.domain(d3.extent(chartData[dvc.period[j]].catLabels, function(d) { return d; }));
+
+
+		y = d3.scaleLinear()
+				.range([height, 0])
+				.domain([minyVal,maxyVal]);
+
+
+		var svg = d3.select('#'+dvc.measures[j]).select(".graphic").append('svg')
+				.attr("width", chart_width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+		if(dvc.config[j].period =="years" || d3.timeYear.count(x.domain()[0], x.domain()[1])>2){
+			xAxis = d3.axisBottom(x).ticks(d3.timeYear.every(+(dvc.config[j].tickNo))).tickFormat(d3.timeFormat("%Y"))
+		} else {
+			xAxis = d3.axisBottom(x).ticks(d3.timeMonth.every(+(dvc.config[j].tickNo))).tickFormat(d3.timeFormat("%b %Y"))
+		}
+
+
+		if(parseInt(d3.select("svg").style("width"))>200){
+			if(minyVal != 0){
+				svg.append("g")
+				  .attr("class", "x axis")
+				  .attr("transform", "translate(0," + (height +15) + ")")
+				  .call(xAxis);
+			} else {
+				svg.append("g")
+				  .attr("class", "x axis")
+				  .attr("transform", "translate(0," + height + ")")
+				  .call(xAxis);
+			}
+
+		}
+		svg.append("g")
+			  .attr("class", "y axis")
+			  .call(d3.axisLeft(y).ticks(4).tickSize( -chart_width));
+
+
+//		if( chartData.discontinuity != "no" ){
+//
+//			svg.append("g").append("path")
+//				.attr("class", "discontinuity")
+//				.attr("d", function (){
+//						return ("M"+	x(chartData.discontinuity)	+","+ 	y(0)+ "L"+	x(chartData.discontinuity)	+","+	0)
+//				})
+//
+//			svg.append("g")
+//				.attr("class","disconText")
+//				.append("text")
+//				.text(chartData.footnote)
+//				.attr("transform", "translate("+(+x(chartData.discontinuity))+","+75+")");
+//		}
+	if(dvc.config[j].two_series == "no"){
+		line =d3.line()
+			.defined(function(d,i){ return chartData[dvc.period[j]].dataValues[i] != null;})
+			.x(function(d,i) {
+					return x(chartData[dvc.period[j]].catLabels[i]);
+			})
+			.y(function(d,i) {
+					return y(chartData[dvc.period[j]].dataValues[i]);
+		});
+
+
+		if(dvc.config[j].centreline=="yes"){
+			svg.append("line")
+				.attr("id","centreline")
+				.attr('y1',y(minyVal)+15)
+				.attr('y2',y(minyVal)+15)
+				.attr('x1',0)
+				.attr('x2',chart_width);
+		}
+//	 if(dvc.config[j].rolling == "none"){
+		svg.append("path")
+			.style("stroke", function(d, i){ return 	 d.color
+							})
+			.style("stroke-width", "2px")
+			.style("fill", "none")
+			.attr("d", line(chartData[dvc.period[j]].dataValues))
+
+	} else {
+
+		line1 =d3.line()
+			.defined(function(d,i){ return chartData[dvc.period[j]].dataValues[i][0] != null;})
+			.x(function(d,i) {
+					return x(chartData[dvc.period[j]].catLabels[i]);
+			})
+			.y(function(d,i) {
+			//console.log(d)
+			//console.log(i)
+			//console.log(chartData[dvc.period[j]].dataValues[i])
+					return y(chartData[dvc.period[j]].dataValues[i][0]);
+		});
+
+		line2 =d3.line()
+			.defined(function(d,i){ return chartData[dvc.period[j]].dataValues[i][1] != null;})
+			.x(function(d,i) {
+					return x(chartData[dvc.period[j]].catLabels[i]);
+			})
+			.y(function(d,i) {
+					return y(chartData[dvc.period[j]].dataValues[i][1]);
+		});
+
+		if(dvc.config[j].centreline=="yes"){
+			svg.append("line")
+				.attr("id","centreline")
+				.attr('y1',y(minyVal)+15)
+				.attr('y2',y(minyVal)+15)
+				.attr('x1',0)
+				.attr('x2',chart_width);
+		}
+//	 if(dvc.config[j].rolling == "none"){
+		svg.append("path")
+			.style("stroke", function(d, i){ return 	 d.color
+							})
+			.style("stroke-width", "2px")
+			.style("fill", "none")
+			.attr("d", line1(chartData[dvc.period[j]].dataValues))
+
+		svg.append("path")
+			.style("stroke", function(d, i){ return 	 d.color
+										   })
+			.style("stroke-width", "2px")
+			.style("stroke-dasharray", 5)
+			.style("fill", "none")
+			.attr("d", line2(chartData[dvc.period[j]].dataValues))
+
+		svg.append("text")
+			.attr("class","line_label")
+			.attr("x",	function(d,i) {
+				last = 	chartData[dvc.period[j]].dataValues.length-1
+				return x(chartData[dvc.period[j]].catLabels[last]);
+			})
+			.attr("y",	function(d,i) {
+				last = 	chartData[dvc.period[j]].dataValues.length-1
+				return y(chartData[dvc.period[j]].dataValues[last][0])+15;
+			})
+			.text(chartData.description.labels[0])
+
+		svg.append("text")
+			.attr("class","line_label")
+			.attr("x",	function(d,i) {
+				last = 	chartData[dvc.period[j]].dataValues.length-1
+				return x(chartData[dvc.period[j]].catLabels[last]);
+			})
+			.attr("y",	function(d,i) {
+				last = 	chartData[dvc.period[j]].dataValues.length-1
+				return y(chartData[dvc.period[j]].dataValues[last][1])-5;
+			}).text("women")
+
+	}
+
+//	 } else if(dvc.config[j].rolling == "3 month on 3 month rolling average"){
+//			var parseTime = d3.timeParse("%b %d, %Y");
+//
+//			new_range = [parseTime("Jan 01, 2008"), d3.extent(chartData[dvc.period[j]].catLabels)[1]]
+//
+//
+//			x = d3.scaleTime()
+//				.range([0, chart_width])
+//				.domain(new_range, function(d) { return d; });
+//
+//
+//			if(dvc.config[j].period =="years" || d3.timeYear.count(x.domain()[0], x.domain()[1])>2){
+//				xAxis = d3.axisBottom(x).ticks(d3.timeYear.every(+(dvc.config[j].tickNo))).tickFormat(d3.timeFormat("%Y"))
+//			} else {
+//				xAxis = d3.axisBottom(x).ticks(d3.timeMonth.every(+(dvc.config[j].tickNo))).tickFormat(d3.timeFormat("%b %Y"))
+//			}
+//
+//
+//			d3.select("#"+dvc.config[j].measure_code).select(".x").call(xAxis)
+//
+//			  var movingAverageLine = d3.line()
+//				  .defined(function(d,i) {return i >=6 ;})
+//				  .x(function(d,i) { return x(chartData[dvc.period[j]].catLabels[i]); })
+//				  .y(function(d,i) {
+//					  if (i >= 6) {
+//						  firstthree = (chartData[dvc.period[j]].dataValues[i-3] + chartData[dvc.period[j]].dataValues[i-4] + chartData[dvc.period[j]].dataValues[i-5])/3
+//						  lastthree = (chartData[dvc.period[j]].dataValues[i] + chartData[dvc.period[j]].dataValues[i-1] + chartData[dvc.period[j]].dataValues[i-2])/3
+//						//console.log((100*(lastthree/firstthree))-100)
+//						return y((100*(lastthree/firstthree))-100) ;
+//
+//					  } else {
+//					   return null;
+//					  }
+//				  })
+//
+//			  //.interpolate("basis");
+//
+//			  // Draw the moving average version of the data, as a line.
+//
+//			  svg.append("path")
+//					.style("stroke", function(d, i){ return 	 d.color
+//									})
+//					.style("stroke-width", "2px")
+//					.style("fill", "none")
+//					.attr("class", "average")
+//					.attr("d", movingAverageLine(chartData[dvc.period[j]].dataValues));
+//
+//
+//
+//
+//	} else if (dvc.config[j].rolling == "month on previous year"){
+//
+//			var parseTime = d3.timeParse("%b %d, %Y");
+//
+//			new_range = [parseTime("Jan 01, 2008"), d3.extent(chartData[dvc.period[j]].catLabels)[1]]
+//
+//
+//			x = d3.scaleTime()
+//				.range([0, chart_width])
+//				.domain(new_range, function(d) {return d; });
+//
+//
+//			if(dvc.config[j].period =="years" || d3.timeYear.count(x.domain()[0], x.domain()[1])>2){
+//				xAxis = d3.axisBottom(x).ticks(d3.timeYear.every(+(dvc.config[j].tickNo))).tickFormat(d3.timeFormat("%Y"))
+//			} else {
+//				xAxis = d3.axisBottom(x).ticks(d3.timeMonth.every(+(dvc.config[j].tickNo))).tickFormat(d3.timeFormat("%b %Y"))
+//			}
+//
+//
+//			d3.select("#"+dvc.config[j].measure_code).select(".x").call(xAxis)
+//			var month = 0;
+//     		var year_ago = 0;
+//
+//			var monthOnYearLine = d3.line()
+//   			  .defined(function(d,i) {return i >=12 ;})
+//			  .x(function(d,i) { return x(chartData[dvc.period[j]].catLabels[i]); })
+//			  .y(function(d,i) {
+//				  if (i >= 12) {
+//					 month = chartData[dvc.period[j]].dataValues[i]
+//					 year_ago = chartData[dvc.period[j]].dataValues[i-11]
+//					//  console.log(i+"  "+month+"  ___  "+year_ago+"   "+((100*(month/year_ago))-100 ))
+//					return y((100*(month/year_ago))-100) ;
+//				  } else {
+//					//  console.log(i+"  "+month+"  ___  "+year_ago)
+//					  return null;
+//				  }
+//			  })
+//
+//
+//		svg.append("path")
+//			.style("stroke", function(d,i){ return d.color; })
+//			.style("stroke-width", "2px")
+//			.style("fill", "none")
+//			.attr("class", "monthonyear")
+//			.attr("d", monthOnYearLine(chartData[dvc.period[j]].dataValues));
+//	}
+
+
+
+		if(dvc.config[j].markers=="yes"){
+			svg.append('g')
+				.selectAll("circle")
+				.data(chartData[dvc.period[j]].dataValues)
+				.enter()
+				.append("circle")
+				.style("stroke", function(d,i){ return dvc.config[j].color; })
+				.style("stroke-width", "2px")
+				.style("fill", "white")
+				.attr("class", "circles1")
+				.attr("cx", function(d,i){
+					return x(chartData[dvc.period[j]].catLabels[i]);
+				})
+				.attr("cy",function(d,i) { return y(d); })
+				.attr("r",function(d){ return d ==null ? 0 : 3})
+		}
+
+		svg.append("g")
+			.attr("transform", "translate(-20,-10)")
+			.append("text")
+			.attr("class","chartUnits")
+			.text(function(){
+				if(dvc.config[j].rolling=="none"){
+					return chartData.description.unit
+				}
+			})
+
+			//use pym to calculate chart dimensions
+			if (pymChild) {
+				pymChild.sendHeight();
+			}
+
+	} //end drawLineChart()
+
+	function drawBigNo(){
+
+		d3.select('#'+dvc.measures[j]).select(".title_div").append("h2").attr("class", "measure_caption").text(dvc.config[j].measure);
+
+		d3.select('#'+dvc.measures[j]).select(".measure_title")
+			.append("div")
+			.attr("class", "subtitle")
+			.append("a")
+			.attr("href", function(){
+					//url = dvc.config[j].url
+					//	if(url =="none"){
+							return chartData.link_to
+					//	} else {
+					//		return url.replace("data", "")
+					//	}
+					})
+			.attr("target", "_blank")
+			.html(chartData.description.title)
+
+			d3.select('#'+dvc.measures[j])
+					.select(".measure_title")
+					.append("text")
+					.html(function(){
+						if(dvc.config[j].rolling != "none"){
+							return ", "+dvc.config[j].rolling
+						}
+					});
+
+
+		d3.select('#'+dvc.measures[j])
+				.select(".graphic").append("img")
+				.attr("class", "img-responsive")
+				.attr("src", function(d){
+					//console.log(dvc.config[j])
+					return dvc.config[j].svg;
+				 });
+	}
+
+	function drawHorizontalBarChart(){
+
+		d3.select('#'+dvc.measures[j]).select(".title_div").append("h2").attr("class", "measure_caption").text(dvc.config[j].measure);
+		d3.select('#'+dvc.measures[j]).select(".measure_title")
+			.append("div")
+			.attr("class", "subtitle")
+			.append("a")
+			.attr("href", dvc.config[j].link_to)
+			.attr("target", "_blank")
+			.html(chartData.description.title)
+
+			d3.select('#'+dvc.measures[j])
+					.select(".measure_title")
+					.append("text")
+					.html(function(){
+						if(dvc.config[j].rolling != "none"){
+							return ", "+dvc.config[j].rolling
+						}
+					});
+
+		y = d3.scaleBand()
+			.range([0,height])
+			.padding(0.1)
+			//.domain([50,70])
+			.domain(chartData[dvc.period[j]].catLabels)
+
+
+		maxyVal=d3.max(chartData[dvc.period[j]].dataValues)
+
+		x = d3.scaleLinear()
+		    .range([0, chart_width])
+			.domain([0,maxyVal]);
+
+
+		var svg = d3.select('#'+dvc.measures[j]).select(".graphic").append('svg')
+				.attr("width", chart_width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+		yAxis = d3.axisLeft(y)//.tickFormat(d3.timeFormat("%Y"))
+
+
+
+		svg.append("g")
+			  .attr("class", "y axis")
+			  //.attr("transform", "translate(0," + height + ")")
+			  .attr("transform", "translate("+0+", 0)")
+			  .call(yAxis);
+
+
+		svg.append("g")
+			 .attr("class", "x axis")
+			 .call(d3.axisTop(x).tickSize( -height));
+
+
+		svg.append("g").selectAll(".bar")
+				.data(chartData[dvc.period[j]].dataValues)
+				.enter()
+				.append("rect")
+			    .attr("class", "bar")
+				.style("fill", function(d,i){ return dvc.config[j].color; })
+			 //   .attr("x", function(d, i) { return x(chartData[dvc.period[j]].catLabels[i]); })
+				.attr("y", function(d, i) { return y(chartData[dvc.period[j]].catLabels[i]); })
+			 //   .attr("width", x.bandwidth())
+		 		.attr("height", y.bandwidth())
+			//   .attr("y", function(d) { return y(d); })
+				.attr("x", function(d) { return x(0); })
+			 //   .attr("height", function(d,i) { return  height - y(d) ; });
+				.attr("width", function(d,i) { return  x(d) ; });
+
+		svg.append("g").append("text")
+			.attr("class","chartUnits")
+			.attr("transform", "translate(100, -20)")
+			.text(chartData.description.unit)
+
+			//use pym to calculate chart dimensions
+			if (pymChild) {
+				pymChild.sendHeight();
+			}
+	}
+
+	function drawVerticalBarChart(){
+
+		d3.select('#'+dvc.measures[j]).select(".title_div").append("h2").attr("class", "measure_caption").text(dvc.config[j].measure);
+		d3.select('#'+dvc.measures[j]).select(".measure_title")
+			.append("div")
+			.attr("class", "subtitle")
+			.append("a")
+			.attr("href", dvc.config[j].link_to)
+			.attr("target", "_blank")
+			.html(chartData.description.title)
+
+			d3.select('#'+dvc.measures[j])
+					.select(".measure_title")
+					.append("text")
+					.html(function(){
+						if(dvc.config[j].rolling != "none"){
+							return ", "+dvc.config[j].rolling
+						}
+					});
+
+
+		x = d3.scaleBand()
+			.range([0,chart_width])
+			.padding(0.1)
+			//.domain([50,70])
+			.domain(chartData[dvc.period[j]].catLabels)
+
+
+		if(dvc.config[j].ymax =="auto"){
+			maxyVal=d3.max(chartData[dvc.period[j]].dataValues)
+		} else {
+			maxyVal= +dvc.config[j].ymax
+		}
+
+
+		y = d3.scaleLinear()
+		    .range([height, 0])
+			.domain([0,maxyVal]);
+
+
+		var svg = d3.select('#'+dvc.measures[j]).select(".graphic").append('svg')
+				.attr("width", chart_width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+		xAxis = d3.axisBottom(x)//.tickFormat(d3.timeFormat("%Y"))
+
+
+
+		svg.append("g")
+			  .attr("class", "x axis")
+			  .attr("transform", "translate(0," + height + ")")
+			  .call(xAxis);
+
+
+		svg.append("g")
+			 .attr("class", "y axis")
+			 .call(d3.axisLeft(y).tickSize( -chart_width).ticks(5));
+
+
+		svg.append("g").selectAll(".bar")
+				.data(chartData[dvc.period[j]].dataValues)
+				.enter()
+				.append("rect")
+			    .attr("class", "bar")
+				.style("fill", function(d,i){ return dvc.config[j].color; })
+			    .attr("x", function(d, i) { return x(chartData[dvc.period[j]].catLabels[i]); })
+			    .attr("width", x.bandwidth())
+			    .attr("y", function(d) { return y(d); })
+			    .attr("height", function(d,i) { return  height - y(d) ; });
+
+
+		svg.append("g").append("text")
+			.attr("class","chartUnits")
+			.attr("transform", "translate(-10, -10)")
+			.text(chartData.description.unit)
+
+			//use pym to calculate chart dimensions
+			if (pymChild) {
+				pymChild.sendHeight();
+			}
+	}
+
+
+	//FILTERING
+
+	d3.selectAll('.measures-filter').selectAll('li')
+			.select("a")
+			.on('click', function(){
+				d3.selectAll(".indicators-filter").selectAll("a").style("opacity", 0.9).classed("highlighted", false)
+				d3.selectAll(".allIndicators").style("opacity", 1).classed("highlighted", true)
+				d3.selectAll(".measures-filter").selectAll("a").style("opacity", 0.9).classed("highlighted", false)
+				d3.select(this).style("opacity", 1).classed("highlighted", true)
+
+				d3.selectAll(".topic").style("display", "none")
+				filtered = d3.select(this).attr("data-filter")
+				if(filtered == ".topic"){
+					d3.selectAll(".measures-filter").selectAll("a").style("opacity", 1)
+					d3.select(".allMeasures").classed("highlighted", true)
+				}
+				d3.selectAll(filtered).style("display", "block")
+				d3.selectAll(".indicatorPanel").style("display", "block")
+
+
+			})
+
+	d3.selectAll('.indicators-filter').selectAll('li')
+			.select("a")
+			.on('click', function(){
+
+				d3.selectAll(".measures-filter").selectAll("a").style("opacity", 0.9).classed("highlighted", false)
+				d3.select(".allMeasures").style("opacity", 1).classed("highlighted", true)
+				d3.selectAll(".indicators-filter").selectAll("a").style("opacity", 0.9).classed("highlighted", false)
+				d3.select(this).style("opacity", 1).classed("highlighted", true)
+
+				d3.selectAll(".indicatorPanel").style("display", "none")
+				filtered = d3.select(this).attr("data-filter")
+				if(filtered == ".indicatorPanel"){
+					d3.selectAll(".measures-filter").selectAll("a").style("opacity", 1)
+					d3.select(".allIndicators").classed("highlighted", true)
+				}
+				d3.selectAll(filtered).style("display", "block")
+				d3.selectAll(".topic").style("display", "block")
+
+
+			})
+
+	$(window).resize(function(){
+			if($(window).width() != window_width){
+				location.reload();
+			}
+	})
+
+		//check to see if the web browser can handle 'inline svg'
+			if (Modernizr)
+			{
+
+				// open and load configuration file.
+				d3.csv("config.csv", function(error, csv)
+				{
+					// store csv data from config file as as global dvc.config variable ...
+					dvc.config = csv;
+					//use pym to create iframed chart dependent on specified variables
+					pymChild = new pym.Child({ renderCallback: createStructure });
+
+				})
+
+
+
+			} // end if ... error
+			else
+			{
+				//use pym to create iframe containing fallback image (which is set as default)
+				pymChild = new pym.Child();
+				if (pymChild) { pymChild.sendHeight(); }
+
+			}// end else ...
+</script>
+
+</html>

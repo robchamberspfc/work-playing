@@ -1,0 +1,38 @@
+{"code":"mintra",
+ "filepth":"",
+ "description":{
+        "title":"Minimum travel time to reach nearest services",
+        "unit":"minutes"
+    },
+    "months":[],
+    "days":[],
+    "quarters":[],
+    "years":[],
+    "other":{
+            "catLabels":[
+                "Hospital",
+                "Further education", 
+                "Town centre",
+                "Secondary school",
+				"Centre of employment", 
+                "GP",  
+                "Primary school",
+                "Food store", 
+                "Average"
+            ],
+            "dataValues":[
+                36.7,
+				19.9,
+				19.9,
+				17.5,
+				12.7,
+				10.8,
+				9.2,
+				9.0,
+				17.0
+
+            ]
+    }
+} 
+
+

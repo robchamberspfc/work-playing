@@ -1,0 +1,44 @@
+ {"code":"psycho",
+ "filepth":"",
+ "description":{
+        "title":"Some evidence indicating depression or anxiety",
+        "unit":"%"
+    },
+    "months":[],
+    "days":[],
+    "quarters":[],
+    "years":{
+            "catLabels":[
+                "2002", 
+                "2003", 
+                "2004", 
+                "2005", 
+                "2006", 
+                "2007", 
+                "2008", 
+                "2010", 
+                "2011", 
+                "2012", 
+                "2013", 
+                "2014", 
+                "2015" 
+                
+            ],
+            "dataValues":[
+                20, 
+                19.3, 
+                19.3, 
+                20.6, 
+                20, 
+                19.5, 
+                20.5, 
+                18, 
+                18.7, 
+                18.8, 
+                18.3, 
+                19.7, 
+                17.3
+            ]
+    }
+} 
+
