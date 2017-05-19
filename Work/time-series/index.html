@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Time series</title>
+</head>
+<body>
+
+  Enter CDID: <input type="text" id="timeseriesInput" name="timeseries">
+
+  <button onclick="getTimeseries()">Search</button>
+
+  <p id = "variations">Variations available: </p>
+
+
+
+<script>
+    function createNode(element) {
+      return document.createElement(element); // Create the type of element you pass in the parameters
+    }
+
+    function append(parent, el) {
+      return parent.appendChild(el); // Append the second parameter(element) to the first one
+    }
+
+    const ul = document.getElementById('variations');
+  var api = "https://api.ons.gov.uk/timeseries/"
+
+    //var timeseries = "abmi"
+  function getTimeseries() {
+    timeseries = document.getElementById("timeseriesInput").value;
+
+
+
+      fetch( api + timeseries )
+      .then(data => data.json())
+      .then(function(data) {
+        let variations = data.items;
+        return variations.map(function(variations){
+          let button = createNode('button'),
+              span = createNode('span');
+          button.name = variations.description.datasetId
+          button.value = variations.uri;
+          button.type = "submit";
+          console.log(button)
+          span.innerHTML = variations.description.datasetId;
+          append(button, span);
+          append(ul, button);
+
+
+          })
+        })
+
+        // Here you get the data to modify as you please
+      // })
+    //  })
+     .catch(function(error) {
+
+       console.log (error)
+        // If there is any error you will catch them here
+      });
+
+
+      //closing tag for function getTimeseries()
+    }
+
+
+</script>
+
+</body>
+</html>

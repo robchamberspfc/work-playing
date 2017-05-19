@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head lang = "en">
+			<meta charset = "UTF-8">
+			<title>ALPHA: User management information</title>
+			<link href = "/florence/css/third-party/jquery.tagit.css" rel = "stylesheet" type = "text/css">
+			<link href = "/florence/css/third-party/tagit.ui-florence.css" rel = "stylesheet" type = "text/css">
+			<link href = "/florence/css/third-party/pagedown.css" rel = "stylesheet" type = "text/css">
+			<link href = "/florence/css/third-party/sweetalert.css" rel = "stylesheet" type = "text/css">
+			<link href = "/florence/assets/css/main.min.css" rel = "stylesheet" type = "text/css">
+			<script type = "text/javascript" src = "assets/js/jquery.min.js"></script>
+			<script type = "text/javascript" src = "js/third-party/sweetalert.min.js"></script>
+			<script>
+			//try to call api and if 401 error redirect to Florence login
+						$.ajax({ cache: false,
+						url: "../zebedee/teams/",
+							error:function (xhr, ajaxOptions, thrownError){
+							if(xhr.status==401) {
+								swal({
+									title: "Please log in",
+									 text: "You need to be logged in to Florence to view this page",
+										type: "error"
+									},
+									function(){
+										window.location.href = ('index.html');
+								});
+							}
+							}
+					});
+			</script>
+	</head>
+	<body style = "background:#F5F6F7">
+			<div class = "wrapper" style = "height:100%; overflow:visible">
+				<nav class = "js-nav">
+						<ul class = "nav__list">
+							<li class = "environment-notification">ALPHA: User management information
+							</li>
+							<li class = "nav__item">
+								<a class = "nav__link" href = "../florence/index.html">Back to safety</a>
+							</li>
+						</ul>
+				</nav>
+			<div class = "wrapper" style = "height:100%; overflow:visible">
+				<div class = "section" id = "main">
+					<section class = "panel panel--padded col col--7" style = "height:100%; overflow:visible">
+							<h2 class = "text-align-center">Find teams a user belongs to</h2>
+							<input type = "text" id = "searchUsers" onkeyup = "tableSearch()" placeholder = "Search for user email">
+									<table id = "teamsAndUsers" class = "table table--primary" style = "table-layout: fixed; width: 100%; font-size:14px">
+										<tr>
+											<thead>
+												<td>Team</td>
+												<td>User/s (email)</td>
+											</thead>
+										</tr>
+									</table>
+					 </section>
+					 <section class = "panel col col--5" style = "height:100%; overflow:visible">
+							 <h2 class = "text-align-center">Users not in any teams</h2>
+								 <h3>Viewers</h3>
+										<p id = "usersNotInTeamsWithPermissionsViewer">
+										</p>
+								 <h3>Publishers</h3>
+										<p id = "usersNotInTeamsWithPermissionsPublisher">
+										</p>
+								 <h3>Data vis users</h3>
+										<p id = "usersNotInTeamsWithPermissionsDatavis">
+										</p>
+										<h2 class = "text-align-center">Never logged in</h2>
+											<p>Users with a temporary password showing they have not logged in since they were created or last had their password reset.
+											</p>
+											<p id = "usersNotEverLoggedIn">
+											</p>
+						 </section>
+				 </div>
+			</div>
+		<script>
+		//Generate table user search section
+
+		// read endpoint and create table
+		$.getJSON( "../zebedee/teams", function( data ) {
+			var items = [];
+			$.each( data.teams, function(i, item ) {
+				items.push( "<tr><td>" + item.name + "</td><td>" + item.members + "</td></tr> ");
+			});
+
+			//add table data generated to table
+			$( "<tbody/>", {
+				html: items.join( "" )
+			}).appendTo( "table" );
+
+		});
+
+		// search on table
+		function tableSearch() {
+			// Declare variables
+			var input, filter, table, tr, td, i;
+			input = document.getElementById( "searchUsers");
+			filter = input.value.toUpperCase();
+			table = document.getElementById( "teamsAndUsers");
+			tr = table.getElementsByTagName( "tr");
+			// Loop through all table rows, and hide those who don't match the search query
+			for (i = 2; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName( "td")[1];
+				if (td) {
+					if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+		</script>
+		<script>
+			//Generate users not in teams section
+
+			//get all users in teams
+			$.getJSON( "../zebedee/teams", function( data ) {
+					usersInTeamsWorking = []
+				$.each( data.teams, function(i, item) {
+					usersInTeamsWorking.push (item.members)
+				});
+
+				//convert users in teams to an array
+				var usersInTeams = [].concat.apply([], usersInTeamsWorking);
+
+				//get all users
+				 $.getJSON( "../zebedee/users", function( data ) {
+					 users = [];
+					 $.each(data, function(i, item) {
+							users.push (item.email)
+						});
+
+						//find difference between users and users in teams to work out users not in teams
+						var usersNotInTeams = $(users).not(usersInTeams).get();
+
+						//add users not in teams to page and include user permission type
+						$.each(usersNotInTeams, function (item, index, arr){
+								$.getJSON( "../zebedee/permission?email="+ index +"", function( data ) {
+											if (data.dataVisPublisher === true) {
+												$("#usersNotInTeamsWithPermissionsDatavis").append("<li>" + data.email + "</strong></li>");
+											} else {
+												if (data.editor === true) {
+													if (data.admin === true) {
+														$("#usersNotInTeamsWithPermissionsPublisher").append("<li>" + data.email + "<strong> (admin)</strong></li>");
+													} else {
+														$("#usersNotInTeamsWithPermissionsPublisher").append("<li>" + data.email + "</li>");
+													}
+												} else {
+													$("#usersNotInTeamsWithPermissionsViewer").append("<li>" + data.email + "</li>");
+												}
+											}
+									});
+								});
+
+				//show users that have never logged in, i.e still have temporary password
+				$.each(users, function (item, index, arr){
+						$.getJSON( "../zebedee/users?email="+ index +"", function( data ) {
+									if (data.temporaryPassword == true) {
+										$("#usersNotEverLoggedIn").append("<li>" + data.email + "</li>");
+									}
+								});
+							});
+						});
+					});
+		</script>
+	</body>
+</html>
