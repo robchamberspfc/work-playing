@@ -1,16 +1,34 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+
     <title>Time series</title>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" type="text/css" href="https://onsdigital.github.io/ons-pattern-library-starter/sixteens/css/old-ie.css">
+    <![endif]-->
+    <!--[if IE 9]>
+    <link rel="stylesheet" type="text/css" href="https://onsdigital.github.io/ons-pattern-library-starter/sixteens/css/ie-9.css">
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.ons.gov.uk/sixteens/81674c0/css/main.css">
+	<![endif]-->
+
 </head>
+
 <body>
 
-  Enter CDID: <input type="text" id="timeseriesInput" name="timeseries">
+  <div class = "wrapper">
 
-  <button onclick="getTimeseries()">Search</button>
+      <p>
+        Enter CDID:<input type="text" id="timeseriesInput" name="timeseries">
+        <button onclick="getTimeseries()">Search</button>
+      </p>
+      <div>
+      <p id = "variations">Variations available: </p>
+      </div>
+      <p id = "timeSeriesData"></p>
 
-  <p id = "variations">Variations available: </p>
-
+  </div>
 
 
 <script>
@@ -22,43 +40,52 @@
       return parent.appendChild(el); // Append the second parameter(element) to the first one
     }
 
-    const ul = document.getElementById('variations');
-  var api = "https://api.ons.gov.uk/timeseries/"
+    function buttonClick(testing) {
+      fetch (api + timeseries + "/dataset/"+ this.name + "/data", {mode: 'cors'} )
+      .then(data => data.json())
+      .then(function(data) {
+        //console.log(data)
+        let timeSeriesData = data.description;
+        //console.log(timeSeriesData)
+        //return timeSeriesData.map(function(timeSeriesData){
+          let p = createNode('p');
+          p.innerHTML = timeSeriesData.title + " (" +  timeSeriesData.cdid + ")" ;
+        append(ts, p);
+      //})
+     })
+    }
+
+    const ts = document.getElementById('timeSeriesData');
+    const tsd = document.getElementById('variations');
+
+    var api = "https://api.ons.gov.uk/timeseries/"
 
     //var timeseries = "abmi"
   function getTimeseries() {
     timeseries = document.getElementById("timeseriesInput").value;
 
-
-
       fetch( api + timeseries , {mode: 'cors'} )
       .then(data => data.json())
       .then(function(data) {
+        //console.log(data)
         let variations = data.items;
+        //console.log(variations)
         return variations.map(function(variations){
           let button = createNode('button'),
               span = createNode('span');
-          button.name = variations.description.datasetId
-          button.value = variations.uri;
-          button.type = "submit";
-          console.log(button)
+          button.name = variations.description.datasetId;
+          //button.type = "submit";
+          button.onclick = buttonClick;
+          //console.log(button)
           span.innerHTML = variations.description.datasetId;
           append(button, span);
-          append(ul, button);
-
+          append(tsd, button);
 
           })
         })
-
-        // Here you get the data to modify as you please
-      // })
-    //  })
      .catch(function(error) {
-
        console.log (error)
-        // If there is any error you will catch them here
       });
-
 
       //closing tag for function getTimeseries()
     }
