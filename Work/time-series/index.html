@@ -23,10 +23,9 @@
         Enter CDID:<input type="text" id="timeseriesInput" name="timeseries">
         <button onclick="getTimeseries()">Search</button>
       </p>
-      <div>
       <p id = "variations">Variations available: </p>
-      </div>
       <p id = "timeSeriesData"></p>
+      <table id = "timeSeriesDataTable"></table>
 
   </div>
 
@@ -46,16 +45,23 @@
       .then(function(data) {
         //console.log(data)
         let timeSeriesData = data.description;
+          let h2 = createNode('h2');
+          h2.innerHTML = timeSeriesData.title + " (" +  timeSeriesData.cdid + ")" ;
+          append(ts, h2);
+
+        let timeSeriesDataQuarters = data.quarters;
         //console.log(timeSeriesData)
-        //return timeSeriesData.map(function(timeSeriesData){
-          let p = createNode('p');
-          p.innerHTML = timeSeriesData.title + " (" +  timeSeriesData.cdid + ")" ;
-        append(ts, p);
-      //})
+        return timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
+          let tr = createNode('tr');
+          tr.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
+          append(tsdt, tr);
+
+      })
      })
     }
 
     const ts = document.getElementById('timeSeriesData');
+    const tsdt = document.getElementById('timeSeriesDataTable');
     const tsd = document.getElementById('variations');
 
     var api = "https://api.ons.gov.uk/timeseries/"
