@@ -1,27 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-
 		<title>Time series</title>
 		<link rel="stylesheet" type="text/css" href="https://cdn.ons.gov.uk/sixteens/81674c0/css/main.css">
-
 	</head>
 
-<body>
+	<body>
+	<nav>
+		 <div class="wrapper">
+				<div class="header col-wrap">
+					 <div class="col col--lg-one-third col--md-one-third">
+							<a href="https://www.ons.gov.uk/">
+								<img class="logo" src="https://cdn.ons.gov.uk/assets/images/ons-logo/v2/ons-logo.svg" alt="Office for National Statistics">                </a>
+					 </div>
+					 <div class="col col--lg-two-thirds col--md-two-thirds print--hide">&nbsp;</div>
+					 <nav class="secondary-nav col col--lg-two-thirds col--md-two-thirds print--hide">
+							<ul class="secondary-nav__list">
+								 <li class="secondary-nav__item">
+										<a class="secondary-nav__link" href="http://developer.ons.gov.uk">Developer hub</a>
+								 </li>
+							</ul>
+					 </nav>
+				</div>
+		 </div>
+	</nav>
+
+	<div class="primary-nav print--hide">
+	 <nav>
+			<div class="wrapper nav-main--hidden" id="nav-primary">
+			</div>
+	 </nav>
+ </div>
 
 	<div class = "wrapper">
 		<h1>Find time series data by series ID
-			<h2>Step 1: Enter CDID <input type="text" id="timeseriesInput" name="timeseries">
-				<button onclick="getTimeseries()">Search</button><button onclick="reset()">Reset</button>
+			<h2>Enter CDID <input type="text" id="timeseriesInput" name="timeseries">
+					<button class = "btn btn--primary btn--thin" onclick = "getTimeseries()">Search</button> <button class="btn btn--secondary btn--thin" onclick="reset()">Reset</button>
 			</h2>
-			<h2 id = "variations" style =  "display:none">Step 2: Choose from variations available</h2>
+
+			<h2 id = "hidden" style =  "display:none">Choose from variations available:</h2>
+			<div class="btn-group" id = "variations">
+			</div>
 			<p id = "timeSeriesData">
-			<table id = "timeSeriesDataMonths"><h4 id = "hidden" style =  "display:none">Monthly data</h4></table>
-			<table id = "timeSeriesDataQuarters"><h4 id = "hidden" style =  "display:none">Quarterly data</h4></table>
-			<table id = "timeSeriesDataYears"><h4 id = "hidden" style =  "display:none">Yearly data</h4></table>
+			<table id = "timeSeriesDataMonths"><h4 id = "hiddenTable" style =  "display:none">Monthly data</h4></table>
+			<table id = "timeSeriesDataQuarters"><h4 id = "hiddenTable" style =  "display:none">Quarterly data</h4></table>
+			<table id = "timeSeriesDataYears"><h4 id = "hiddenTable" style =  "display:none">Yearly data</h4></table>
 			</p>
 	</div>
 
+	<footer class="print--hide">
+		<h2 class="visuallyhidden">Footer links</h2>
+		<div class="footer">
+				<div class="wrapper">
+						<div class="footer-license">
+								<img class="footer-license__img" alt="OGL" width="60" src="https://www.ons.gov.uk/img/ogl.png">
+								<p class="footer-license__text margin-left-sm--0">
+										All content is available under the <a class="icon--hide" href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a> <span class="icon icon-external--light-small"></span>, except where otherwise stated
+						</p>
+				</div>
+		</div>
+	</div>
+	</footer>
 
 <script>
 
@@ -30,6 +69,7 @@
 		const tsdm = document.getElementById('timeSeriesDataMonths');
 		const tsdq = document.getElementById('timeSeriesDataQuarters');
 		const tsdy = document.getElementById('timeSeriesDataYears');
+		const hiddenTable = document.getElementById('hiddenTable');
 		const hidden = document.getElementById('hidden');
 
 		var api = "https://api.ons.gov.uk/timeseries/"
@@ -65,9 +105,14 @@
 									span.innerHTML = variations.description.datasetId;
 									append(button, span);
 									append(tsd, button);
+
+									button.classList.add("btn");
+									button.classList.add("btn--primary");
+									button.classList.add("btn--thin");
+									hidden.style.display = 'block';
 									}
 								 else {
-									hidden.style.display = 'block';
+									hiddenTable.style.display = 'block';
 									//console.log (variations.description.datasetId)
 									fetch (api + timeseries + "/dataset/"+ variations.description.datasetId + "/data", {mode: 'cors'} )
 									.then(data => data.json())
@@ -75,7 +120,10 @@
 										//console.log(test)
 										let timeSeriesData = data.description;
 											let h3 = createNode('h3');
+													p = createNode('p');
 											h3.innerHTML = timeSeriesData.title + " (" +  timeSeriesData.cdid + ")" ;
+											p.innerHTML = "Dataset ID: " + timeSeriesData.datasetId;
+											append(h3, p);
 											append(ts, h3);
 										let timeSeriesDataMonths = data.months;
 										//console.log(timeSeriesDataMonths)
@@ -109,7 +157,7 @@
 			}
 
 			function buttonClick() {
-				hidden.style.display = 'block';
+				hiddenTable.style.display = 'block';
 				fetch (api + timeseries + "/dataset/"+ this.name + "/data", {mode: 'cors'} )
 				.then(data => data.json())
 				.then(function (data) {
