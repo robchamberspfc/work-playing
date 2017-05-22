@@ -42,9 +42,9 @@
 			<div class="btn-group" id = "variations">
 			</div>
 			<p id = "timeSeriesData">
-			<table id = "timeSeriesDataMonths"><h4 id = "hiddenTable" style =  "display:none">Monthly data</h4></table>
-			<table id = "timeSeriesDataQuarters"><h4 id = "hiddenTable" style =  "display:none">Quarterly data</h4></table>
-			<table id = "timeSeriesDataYears"><h4 id = "hiddenTable" style =  "display:none">Yearly data</h4></table>
+			<table id = "timeSeriesDataMonths"><h4 id = "hiddenTableMonths" style =  "display:none">Monthly data</h4></table>
+			<table id = "timeSeriesDataQuarters"><h4 id = "hiddenTableQuarters" style =  "display:none">Quarterly data</h4></table>
+			<table id = "timeSeriesDataYears"><h4 id = "hiddenTableYears" style =  "display:none">Yearly data</h4></table>
 			</p>
 	</div>
 
@@ -69,7 +69,9 @@
 		const tsdm = document.getElementById('timeSeriesDataMonths');
 		const tsdq = document.getElementById('timeSeriesDataQuarters');
 		const tsdy = document.getElementById('timeSeriesDataYears');
-		const hiddenTable = document.getElementById('hiddenTable');
+		const hiddenTableMonths = document.getElementById('hiddenTableMonths');
+		const hiddenTableQuarters = document.getElementById('hiddenTableQuarters');
+		const hiddenTableYears = document.getElementById('hiddenTableYears');
 		const hidden = document.getElementById('hidden');
 
 		var api = "https://api.ons.gov.uk/timeseries/"
@@ -112,12 +114,9 @@
 									hidden.style.display = 'block';
 									}
 								 else {
-									hiddenTable.style.display = 'block';
-									//console.log (variations.description.datasetId)
 									fetch (api + timeseries + "/dataset/"+ variations.description.datasetId + "/data", {mode: 'cors'} )
 									.then(data => data.json())
 									.then(function (data) {
-										//console.log(test)
 										let timeSeriesData = data.description;
 											let h3 = createNode('h3');
 													p = createNode('p');
@@ -126,26 +125,32 @@
 											append(h3, p);
 											append(ts, h3);
 										let timeSeriesDataMonths = data.months;
-										//console.log(timeSeriesDataMonths)
-										return timeSeriesDataMonths.map(function(timeSeriesDataMonths){
-											let tr1 = createNode('tr');
-											tr1.innerHTML = "<td>" + timeSeriesDataMonths.date + "</td><td>" + timeSeriesDataMonths.value + "</td>";
-											append(tsdm, tr1);
-										});
-										let timeSeriesDataQuarters = data.quarters;
-										//console.log(timeSeriesDataQuarters)
-										return timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
-											let tr2 = createNode('tr');
-											tr2.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
-											append(tsdq, tr2);
-										});
-										let timeSeriesDataYears = data.years;
-										//console.log(timeSeriesDataYears)
-										return timeSeriesDataYears.map(function(timeSeriesDataYears){
-											let tr3 = createNode('tr');
-											tr3.innerHTML = "<td>" + timeSeriesDataYears.date + "</td><td>" + timeSeriesDataYears.quarters.value + "</td>";
-											append(tsdy, tr3);
-										})
+										if (data.months.length > 0){
+											hiddenTableMonths.style.display = 'block';
+											timeSeriesDataMonths.map(function(timeSeriesDataMonths){
+												let tr1 = createNode('tr');
+												tr1.innerHTML = "<td>" + timeSeriesDataMonths.date + "</td><td>" + timeSeriesDataMonths.value + "</td>";
+												append(tsdm, tr1);
+											});
+										}
+										if (data.quarters.length > 0){
+											hiddenTableQuarters.style.display = 'block';
+											let timeSeriesDataQuarters = data.quarters;
+											timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
+												let tr2 = createNode('tr');
+												tr2.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
+												append(tsdq, tr2);
+											});
+										}
+										if (data.years.length > 0){
+											hiddenTableYears.style.display = 'block';
+											let timeSeriesDataYears = data.years;
+											timeSeriesDataYears.map(function(timeSeriesDataYears){
+												let tr3 = createNode('tr');
+												tr3.innerHTML = "<td>" + timeSeriesDataYears.date + "</td><td>" + timeSeriesDataYears.value + "</td>";
+												append(tsdy, tr3);
+											})
+										}
 									})
 								}
 							})
@@ -157,7 +162,7 @@
 			}
 
 			function buttonClick() {
-				hiddenTable.style.display = 'block';
+
 				fetch (api + timeseries + "/dataset/"+ this.name + "/data", {mode: 'cors'} )
 				.then(data => data.json())
 				.then(function (data) {
@@ -167,26 +172,32 @@
 						h2.innerHTML = timeSeriesData.title + " (" +  timeSeriesData.cdid + ")" ;
 						append(ts, h2);
 					let timeSeriesDataMonths = data.months;
-					//console.log(timeSeriesDataMonths)
-					return timeSeriesDataMonths.map(function(timeSeriesDataMonths){
-						let tr1 = createNode('tr');
-						tr1.innerHTML = "<td>" + timeSeriesDataMonths.date + "</td><td>" + timeSeriesDataMonths.value + "</td>";
-						append(tsdm, tr1);
-					});
-					let timeSeriesDataQuarters = data.quarters;
-					//console.log(timeSeriesDataQuarters)
-					return timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
-						let tr2 = createNode('tr');
-						tr2.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
-						append(tsdq, tr2);
-					});
-					let timeSeriesDataYears = data.years;
-					//console.log(timeSeriesDataYears)
-					return timeSeriesDataYears.map(function(timeSeriesDataYears){
-						let tr3 = createNode('tr');
-						tr3.innerHTML = "<td>" + timeSeriesDataYears.date + "</td><td>" + timeSeriesDataYears.quarters.value + "</td>";
-						append(tsdy, tr3);
-					})
+					if (data.months.length > 0){
+						hiddenTableMonths.style.display = 'block';
+						timeSeriesDataMonths.map(function(timeSeriesDataMonths){
+							let tr1 = createNode('tr');
+							tr1.innerHTML = "<td>" + timeSeriesDataMonths.date + "</td><td>" + timeSeriesDataMonths.value + "</td>";
+							append(tsdm, tr1);
+						});
+					}
+					if (data.quarters.length > 0){
+						hiddenTableQuarters.style.display = 'block';
+						let timeSeriesDataQuarters = data.quarters;
+						timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
+							let tr2 = createNode('tr');
+							tr2.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
+							append(tsdq, tr2);
+						});
+					}
+					if (data.years.length > 0){
+						hiddenTableYears.style.display = 'block';
+						let timeSeriesDataYears = data.years;
+						timeSeriesDataYears.map(function(timeSeriesDataYears){
+							let tr3 = createNode('tr');
+							tr3.innerHTML = "<td>" + timeSeriesDataYears.date + "</td><td>" + timeSeriesDataYears.value + "</td>";
+							append(tsdy, tr3);
+						})
+					}
 			 })
 			}
 
