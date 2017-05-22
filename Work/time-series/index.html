@@ -1,101 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+	<head>
 
-    <title>Time series</title>
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" type="text/css" href="https://onsdigital.github.io/ons-pattern-library-starter/sixteens/css/old-ie.css">
-    <![endif]-->
-    <!--[if IE 9]>
-    <link rel="stylesheet" type="text/css" href="https://onsdigital.github.io/ons-pattern-library-starter/sixteens/css/ie-9.css">
-    <![endif]-->
-    <!--[if gt IE 9]><!-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.ons.gov.uk/sixteens/81674c0/css/main.css">
-	<![endif]-->
+		<title>Time series</title>
+		<link rel="stylesheet" type="text/css" href="https://cdn.ons.gov.uk/sixteens/81674c0/css/main.css">
 
-</head>
+	</head>
 
 <body>
 
-  <div class = "wrapper">
-
-      <p>
-        Enter CDID:<input type="text" id="timeseriesInput" name="timeseries">
-        <button onclick="getTimeseries()">Search</button>
-      </p>
-      <p id = "variations">Variations available: </p>
-      <p id = "timeSeriesData"></p>
-      <table id = "timeSeriesDataTable"></table>
-
-  </div>
+	<div class = "wrapper">
+		<h1>Find time series data by series ID
+			<h2>Step 1: Enter CDID <input type="text" id="timeseriesInput" name="timeseries">
+				<button onclick="getTimeseries()">Search</button>
+			</h2><hr>
+			<h2 id = "variations" style =  "display:none">Step 2: Choose from variations available</h2>
+			<p id = "timeSeriesData">
+			<table id = "timeSeriesDataMonths"><h3>Monthly data</h3></table>
+			<table id = "timeSeriesDataQuarters"><h3>Quarterly data</h3></table>
+			<table id = "timeSeriesDataYears"><h3>Yearly data</h3></table>
+			</p>
+	</div>
 
 
 <script>
-    function createNode(element) {
-      return document.createElement(element); // Create the type of element you pass in the parameters
-    }
 
-    function append(parent, el) {
-      return parent.appendChild(el); // Append the second parameter(element) to the first one
-    }
+		function createNode(element) {
+			return document.createElement(element); // Create the type of element you pass in the parameters
+		}
 
-    function buttonClick(testing) {
-      fetch (api + timeseries + "/dataset/"+ this.name + "/data", {mode: 'cors'} )
-      .then(data => data.json())
-      .then(function(data) {
-        //console.log(data)
-        let timeSeriesData = data.description;
-          let h2 = createNode('h2');
-          h2.innerHTML = timeSeriesData.title + " (" +  timeSeriesData.cdid + ")" ;
-          append(ts, h2);
+		function append(parent, el) {
+			return parent.appendChild(el); // Append the second parameter(element) to the first one
+		}
 
-        let timeSeriesDataQuarters = data.quarters;
-        //console.log(timeSeriesData)
-        return timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
-          let tr = createNode('tr');
-          tr.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
-          append(tsdt, tr);
+		function buttonClick() {
+			fetch (api + timeseries + "/dataset/"+ this.name + "/data", {mode: 'cors'} )
+			.then(data => data.json())
+			.then(function (data) {
+				//console.log(test)
+				let timeSeriesData = data.description;
+					let h2 = createNode('h2');
+					h2.innerHTML = timeSeriesData.title + " (" +  timeSeriesData.cdid + ")" ;
+					append(ts, h2);
 
-      })
-     })
-    }
+				let timeSeriesDataMonths = data.months;
+				//console.log(timeSeriesDataMonths)
+				return timeSeriesDataMonths.map(function(timeSeriesDataMonths){
+					let tr1 = createNode('tr');
+					tr1.innerHTML = "<td>" + timeSeriesDataMonths.date + "</td><td>" + timeSeriesDataMonths.value + "</td>";
+					append(tsdm, tr1);
+				});
 
-    const ts = document.getElementById('timeSeriesData');
-    const tsdt = document.getElementById('timeSeriesDataTable');
-    const tsd = document.getElementById('variations');
+				let timeSeriesDataQuarters = data.quarters;
+				//console.log(timeSeriesDataQuarters)
+				return timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
+					let tr2 = createNode('tr');
+					tr2.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
+					append(tsdq, tr2);
+				});
 
-    var api = "https://api.ons.gov.uk/timeseries/"
+				let timeSeriesDataYears = data.years;
+				//console.log(timeSeriesDataYears)
+				return timeSeriesDataYears.map(function(timeSeriesDataYears){
+					let tr3 = createNode('tr');
+					tr3.innerHTML = "<td>" + timeSeriesDataYears.date + "</td><td>" + timeSeriesDataYears.quarters.value + "</td>";
+					append(tsdy, tr3);
+				})
+		 })
+		}
 
-    //var timeseries = "abmi"
-  function getTimeseries() {
-    timeseries = document.getElementById("timeseriesInput").value;
+		const ts = document.getElementById('timeSeriesData');
+		const tsd = document.getElementById('variations');
+		const tsdm = document.getElementById('timeSeriesDataMonths');
+		const tsdq = document.getElementById('timeSeriesDataQuarters');
+		const tsdy = document.getElementById('timeSeriesDataYears');
 
-      fetch( api + timeseries , {mode: 'cors'} )
-      .then(data => data.json())
-      .then(function(data) {
-        //console.log(data)
-        let variations = data.items;
-        //console.log(variations)
-        return variations.map(function(variations){
-          let button = createNode('button'),
-              span = createNode('span');
-          button.name = variations.description.datasetId;
-          //button.type = "submit";
-          button.onclick = buttonClick;
-          //console.log(button)
-          span.innerHTML = variations.description.datasetId;
-          append(button, span);
-          append(tsd, button);
+		var api = "https://api.ons.gov.uk/timeseries/"
 
-          })
-        })
-     .catch(function(error) {
-       console.log (error)
-      });
+		//var timeseries = "abmi"
+	function getTimeseries() {
+		timeseries = document.getElementById("timeseriesInput").value;
 
-      //closing tag for function getTimeseries()
-    }
+			fetch( api + timeseries , {mode: 'cors'} )
+			.then(data => data.json())
+			.then(function(data) {
+				//console.log(data)
+				let showButtons = data.totalItems;
+				//console.log(showButtons);
+				let variations = data.items;
+				//console.log(variations)
+				return variations.map(function(variations){
 
+
+					if (showButtons > 1){
+
+						//console.log ("true")
+						tsd.style.display = 'block';
+
+
+								let button = createNode('button'),
+										span = createNode('span');
+								button.name = variations.description.datasetId;
+								//button.type = "submit";
+								button.onclick = buttonClick;
+								//console.log(button)
+								span.innerHTML = variations.description.datasetId;
+								append(button, span);
+								append(tsd, button);
+
+
+								}
+
+							 else {
+
+								//console.log (variations.description.datasetId)
+								fetch (api + timeseries + "/dataset/"+ variations.description.datasetId + "/data", {mode: 'cors'} )
+								.then(data => data.json())
+								.then(function (data) {
+									//console.log(test)
+									let timeSeriesData = data.description;
+										let h2 = createNode('h2');
+										h2.innerHTML = timeSeriesData.title + " (" +  timeSeriesData.cdid + ")" ;
+										append(ts, h2);
+
+									let timeSeriesDataMonths = data.months;
+									//console.log(timeSeriesDataMonths)
+									return timeSeriesDataMonths.map(function(timeSeriesDataMonths){
+										let tr1 = createNode('tr');
+										tr1.innerHTML = "<td>" + timeSeriesDataMonths.date + "</td><td>" + timeSeriesDataMonths.value + "</td>";
+										append(tsdm, tr1);
+									});
+
+									let timeSeriesDataQuarters = data.quarters;
+									//console.log(timeSeriesDataQuarters)
+									return timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
+										let tr2 = createNode('tr');
+										tr2.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
+										append(tsdq, tr2);
+									});
+
+									let timeSeriesDataYears = data.years;
+									//console.log(timeSeriesDataYears)
+									return timeSeriesDataYears.map(function(timeSeriesDataYears){
+										let tr3 = createNode('tr');
+										tr3.innerHTML = "<td>" + timeSeriesDataYears.date + "</td><td>" + timeSeriesDataYears.quarters.value + "</td>";
+										append(tsdy, tr3);
+									})
+							 })
+
+
+							}
+						})
+					})
+
+				 .catch(function(error) {
+					 alert (error)
+
+			});
+
+			//closing tag for function getTimeseries()
+		}
 
 </script>
 
