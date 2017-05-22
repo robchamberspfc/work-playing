@@ -48,17 +48,14 @@
 			<div class="btn-group" id = "variations">
 			</div>
 			<h3 id = "timeSeriesData"></h3>
-				<div class="nav-secondary nav-secondary--border-right-lg col col--lg-one">
-					<ul class="nav-secondary__list">
-							<li class="nav-secondary__item" id = "hiddenTableMonths" style =  "display:none"><a href="#timeSeriesDataMonths" class="js-scroll">Monthly data</a></li>
-							<li class="nav-secondary__item" id = "hiddenTableQuarters" style =  "display:none"><a href="#timeSeriesDataQuarters" class="js-scroll" >Quarterly data</a></li>
-							<li class="nav-secondary__item" id = "hiddenTableYears" style =  "display:none"><a href="#timeSeriesDataYears" class="js-scroll">Yearly data</a></li>
-					</ul>
-			</div>
-				<table id = "timeSeriesDataMonths"></table><br>
-				<table id = "timeSeriesDataQuarters"></table><br>
-				<table id = "timeSeriesDataYears"></table><br>
-			</p>
+				<ul class="nav-secondary__list">
+						<li class="nav-secondary__item" id = "hiddenTableMonths" style =  "display:none"><a href="#timeSeriesDataMonths" class="js-scroll">Monthly data</a></li>
+						<li class="nav-secondary__item" id = "hiddenTableQuarters" style =  "display:none"><a href="#timeSeriesDataQuarters" class="js-scroll" >Quarterly data</a></li>
+						<li class="nav-secondary__item" id = "hiddenTableYears" style =  "display:none"><a href="#timeSeriesDataYears" class="js-scroll">Yearly data</a></li>
+				</ul>
+				<table id = "timeSeriesDataMonths" class="table-advanced js-table-sort" role="grid" data-table="" style="display: table;"></table>
+				<table id = "timeSeriesDataQuarters"></table>
+				<table id = "timeSeriesDataYears"></table>
 	</div>
 
 	<footer class="print--hide">
@@ -135,6 +132,7 @@
 												append(ts, p);
 											let timeSeriesDataMonths = data.months;
 											if (data.months.length > 0){
+												tsdm.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
 												hiddenTableMonths.style.display = '';
 												timeSeriesDataMonths.map(function(timeSeriesDataMonths){
 													let tr1 = createNode('tr');
@@ -143,6 +141,7 @@
 												});
 											}
 											if (data.quarters.length > 0){
+												tsdq.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
 												hiddenTableQuarters.style.display = '';
 												let timeSeriesDataQuarters = data.quarters;
 												timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
@@ -152,6 +151,7 @@
 												});
 											}
 											if (data.years.length > 0){
+												tsdy.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
 												hiddenTableYears.style.display = '';
 												let timeSeriesDataYears = data.years;
 												timeSeriesDataYears.map(function(timeSeriesDataYears){
@@ -183,6 +183,7 @@
 						append(ts, p);
 					let timeSeriesDataMonths = data.months;
 					if (data.months.length > 0){
+						tsdm.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
 						hiddenTableMonths.style.display = '';
 						timeSeriesDataMonths.map(function(timeSeriesDataMonths){
 							let tr1 = createNode('tr');
@@ -191,6 +192,7 @@
 						});
 					}
 					if (data.quarters.length > 0){
+						tsdq.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
 						hiddenTableQuarters.style.display = '';
 						let timeSeriesDataQuarters = data.quarters;
 						timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
@@ -200,6 +202,7 @@
 						});
 					}
 					if (data.years.length > 0){
+						tsdy.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
 						hiddenTableYears.style.display = '';
 						let timeSeriesDataYears = data.years;
 						timeSeriesDataYears.map(function(timeSeriesDataYears){
