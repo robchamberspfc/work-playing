@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Time series</title>
+		<link rel="stylesheet" type="text/css" href="https://cdn.ons.gov.uk/sixteens/81674c0/css/main.css">
+		<meta content="width=device-width,initial-scale=1.0,user-scalable=1" name="viewport">
+	</head>
+
+	<body>
+
+	<div class="beta-banner">
+    <div class="wrapper">
+      <p><span class="font-size--16"><strong style="padding: 2px 7px 3px;text-transform: uppercase;color: #fff; background-color: #323132;">Warning</strong> this is a prototype and the content may not be complete or accurate</span></p>
+    </div>
+  </div>
+	<nav>
+		 <div class="wrapper">
+				<div class="header col-wrap">
+					 <div class="col col--lg-one-third col--md-one-third">
+							<a href="https://www.ons.gov.uk/">
+								<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Vitruvian_Man_Noun_project_6674.svg/1000px-Vitruvian_Man_Noun_project_6674.svg.png" alt="Office for National Statistics">                </a>
+					 </div>
+					 <div class="col col--lg-two-thirds col--md-two-thirds print--hide">&nbsp;</div>
+					 <nav class="secondary-nav col col--lg-two-thirds col--md-two-thirds print--hide">
+							<ul class="secondary-nav__list">
+								 <li class="secondary-nav__item">
+										<a class="secondary-nav__link" href="http://developer.ons.gov.uk">Developer hub (beta)</a>
+								 </li>
+							</ul>
+					 </nav>
+				</div>
+		 </div>
+	</nav>
+
+	<div class="primary-nav print--hide">
+	 <nav>
+			<div class="wrapper nav-main--hidden" id="nav-primary">
+			</div>
+	 </nav>
+ </div>
+
+	<div class = "wrapper">
+		<h1>Find time series data by series ID </h1>
+			<h2>Enter CDID <input type="text" id="timeseriesInput" name="timeseries">
+					<button class = "btn btn--primary btn--thin" onclick = "getTimeseries()">Search</button> <button class="btn btn--secondary btn--thin" onclick="reset()">Reset</button>
+						<p>For example; CHAW, ABMI, UKPOP</p>
+					<hr>
+			</h2>
+			<h3 id = "hidden" style =  "display:none">Choose from variations available:</h3>
+			<div class="btn-group" id = "variations">
+			</div>
+			<h3 id = "timeSeriesData"></h3>
+				<ul class="nav-secondary__list">
+						<li class="nav-secondary__item" id = "hiddenTableMonths" style =  "display:none"><a href="#timeSeriesDataMonths" class="js-scroll">Monthly data</a></li>
+						<li class="nav-secondary__item" id = "hiddenTableQuarters" style =  "display:none"><a href="#timeSeriesDataQuarters" class="js-scroll" >Quarterly data</a></li>
+						<li class="nav-secondary__item" id = "hiddenTableYears" style =  "display:none"><a href="#timeSeriesDataYears" class="js-scroll">Yearly data</a></li>
+				</ul>
+				<table id = "timeSeriesDataMonths" class="table-advanced js-table-sort" role="grid" data-table="" style="display: table;"></table>
+				<table id = "timeSeriesDataQuarters" class="table-advanced js-table-sort" role="grid" data-table="" style="display: table;"></table>
+				<table id = "timeSeriesDataYears" class="table-advanced js-table-sort" role="grid" data-table="" style="display: table;"></table>
+	</div>
+
+	<footer class="print--hide">
+		<h2 class="visuallyhidden">Footer links</h2>
+		<div class="footer">
+				<div class="wrapper">
+						<div class="footer-license">
+								<img class="footer-license__img" alt="OGL" width="60" src="https://www.ons.gov.uk/img/ogl.png">
+								<p class="footer-license__text margin-left-sm--0">
+										All content is available under the <a class="icon--hide" href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>, except where otherwise stated
+								</p>
+						</div>
+				</div>
+		</div>
+	</footer>
+
+<script>
+
+		const ts = document.getElementById('timeSeriesData');
+		const tsd = document.getElementById('variations');
+		const tsdm = document.getElementById('timeSeriesDataMonths');
+		const tsdq = document.getElementById('timeSeriesDataQuarters');
+		const tsdy = document.getElementById('timeSeriesDataYears');
+		const hiddenTableMonths = document.getElementById('hiddenTableMonths');
+		const hiddenTableQuarters = document.getElementById('hiddenTableQuarters');
+		const hiddenTableYears = document.getElementById('hiddenTableYears');
+		const hidden = document.getElementById('hidden');
+
+		var api = "https://api.ons.gov.uk/timeseries/"
+
+		function createNode(element) {
+			return document.createElement(element); // Create the type of element you pass in the parameters
+		}
+
+		function append(parent, el) {
+			return parent.appendChild(el); // Append the second parameter(element) to the first one
+		}
+
+		//var timeseries = "abmi"
+		function getTimeseries() {
+			timeseries = document.getElementById("timeseriesInput").value;
+				if (timeseries.length < 4 || timeseries.length > 5) {
+					sweetAlert("Incorrect ID", "Please enter a valid time series identifier");
+					} else {
+					fetch( api + timeseries , {mode: 'cors'} )
+					.then(data => data.json())
+					.then(function(data) {
+						let showButtons = data.totalItems;
+						let variations = data.items;
+						return variations.map(function(variations){
+							if (showButtons > 1){
+								tsd.style.display = 'block';
+										let button = createNode('button'),
+												span = createNode('span');
+										button.name = variations.description.datasetId;
+										button.onclick = buttonClick;
+										span.innerHTML = variations.description.datasetId;
+										append(button, span);
+										append(tsd, button);
+										button.classList.add("btn");
+										button.classList.add("btn--primary");
+										button.classList.add("btn--thin");
+										hidden.style.display = 'block';
+										}
+									 else {
+										fetch (api + timeseries + "/dataset/"+ variations.description.datasetId + "/data", {mode: 'cors'} )
+										.then(data => data.json())
+										.then(function (data) {
+											let timeSeriesData = data.description;
+												let p = createNode('p');
+												ts.innerHTML = timeSeriesData.title + " (" +  timeSeriesData.cdid + ")" ;
+												p.innerHTML = "Dataset ID: " + timeSeriesData.datasetId;
+												//append(h3, p);
+												append(ts, p);
+											let timeSeriesDataMonths = data.months;
+											if (data.months.length > 0){
+												tsdm.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
+												hiddenTableMonths.style.display = '';
+												timeSeriesDataMonths.map(function(timeSeriesDataMonths){
+													let tr1 = createNode('tr');
+													tr1.innerHTML = "<td>" + timeSeriesDataMonths.date + "</td><td>" + timeSeriesDataMonths.value + "</td>";
+													append(tsdm, tr1);
+												});
+											}
+											if (data.quarters.length > 0){
+												tsdq.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
+												hiddenTableQuarters.style.display = '';
+												let timeSeriesDataQuarters = data.quarters;
+												timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
+													let tr2 = createNode('tr');
+													tr2.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
+													append(tsdq, tr2);
+												});
+											}
+											if (data.years.length > 0){
+												tsdy.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
+												hiddenTableYears.style.display = '';
+												let timeSeriesDataYears = data.years;
+												timeSeriesDataYears.map(function(timeSeriesDataYears){
+													let tr3 = createNode('tr');
+													tr3.innerHTML = "<td>" + timeSeriesDataYears.date + "</td><td>" + timeSeriesDataYears.value + "</td>";
+													append(tsdy, tr3);
+												})
+											}
+									})
+								}
+							})
+						})
+					 .catch(function(error) {
+						 sweetAlert("Incorrect ID", "Please enter a valid time series identifier");
+						 console.log(error)
+				});
+			}
+			}
+
+			function buttonClick() {
+				fetch (api + timeseries + "/dataset/"+ this.name + "/data", {mode: 'cors'} )
+				.then(data => data.json())
+				.then(function (data) {
+					let timeSeriesData = data.description;
+						let p = createNode('p');
+						ts.innerHTML = timeSeriesData.title + " (" +  timeSeriesData.cdid + ")" ;
+						p.innerHTML = "Dataset ID: " + timeSeriesData.datasetId;
+						//append(h3, p);
+						append(ts, p);
+					let timeSeriesDataMonths = data.months;
+					if (data.months.length > 0){
+						tsdm.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
+						hiddenTableMonths.style.display = '';
+						timeSeriesDataMonths.map(function(timeSeriesDataMonths){
+							let tr1 = createNode('tr');
+							tr1.innerHTML = "<td>" + timeSeriesDataMonths.date + "</td><td>" + timeSeriesDataMonths.value + "</td>";
+							append(tsdm, tr1);
+						});
+					}
+					if (data.quarters.length > 0){
+						tsdq.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
+						hiddenTableQuarters.style.display = '';
+						let timeSeriesDataQuarters = data.quarters;
+						timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
+							let tr2 = createNode('tr');
+							tr2.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
+							append(tsdq, tr2);
+						});
+					}
+					if (data.years.length > 0){
+						tsdy.innerHTML = "<thead><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></thead>";
+						hiddenTableYears.style.display = '';
+						let timeSeriesDataYears = data.years;
+						timeSeriesDataYears.map(function(timeSeriesDataYears){
+							let tr3 = createNode('tr');
+							tr3.innerHTML = "<td>" + timeSeriesDataYears.date + "</td><td>" + timeSeriesDataYears.value + "</td>";
+							append(tsdy, tr3);
+						})
+					}
+			 })
+			}
+
+			function reset (){
+				location.reload();
+			}
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+</body>
+</html>
