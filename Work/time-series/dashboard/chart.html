@@ -1,0 +1,85 @@
+<html>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<body>
+
+  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+  <table id = "timeSeriesDataMonths" class="table-advanced js-table-sort" role="grid" data-table="" style="display: table;"></table>
+
+
+
+</body>
+
+<script>
+
+const tsdm = document.getElementById('timeSeriesDataMonths');
+function createNode(element) {
+  return document.createElement(element); // Create the type of element you pass in the parameters
+}
+
+function append(parent, el) {
+  return parent.appendChild(el); // Append the second parameter(element) to the first one
+}
+
+fetch ("https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/chaw/data", {mode: 'cors'} )
+.then(data => data.json())
+.then(function (data) {
+  console.log (data)
+  let timeSeriesDataMonths = data.months;
+  console.log(timeSeriesDataMonths)
+  if (data.months.length > 0){
+    tsdm.innerHTML = "<tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></th>";
+    timeSeriesDataMonths.map(function(timeSeriesDataMonths){
+      let tr1 = createNode('tr');
+      let tbody = createNode('tbody');
+      tr1.innerHTML = "<td>" + timeSeriesDataMonths.date + "</td><td>" + timeSeriesDataMonths.value + "</td>";
+      append(tsdm, tr1);
+
+      Highcharts.chart('container', {
+          data: {
+              table: 'timeSeriesDataMonths'
+          },
+          chart: {
+              type: 'line'
+          },
+          title: {
+              text: 'Data extracted from a HTML table in the page'
+          },
+          yAxis: {
+              allowDecimals: false,
+          },
+      });
+    });
+  }
+  /*if (data.quarters.length > 0){
+    tsdq.innerHTML = "<th><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></th>";
+    hiddenTableQuarters.style.display = '';
+    let timeSeriesDataQuarters = data.quarters;
+    timeSeriesDataQuarters.map(function(timeSeriesDataQuarters){
+      let tr2 = createNode('tr');
+      tr2.innerHTML = "<td>" + timeSeriesDataQuarters.date + "</td><td>" + timeSeriesDataQuarters.value + "</td>";
+      append(tsdq, tr2);
+    });
+  }
+  if (data.years.length > 0){
+    tsdy.innerHTML = "<th><tr role = 'row'><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Period</th><th class='table-advanced__header js-table-sort__header text-left' scope='col' role='columnheader'>Value</th></tr></th>";
+    hiddenTableYears.style.display = '';
+    let timeSeriesDataYears = data.years;
+    timeSeriesDataYears.map(function(timeSeriesDataYears){
+      let tr3 = createNode('tr');
+      tr3.innerHTML = "<td>" + timeSeriesDataYears.date + "</td><td>" + timeSeriesDataYears.value + "</td>";
+      append(tsdy, tr3);
+    })
+  }*/
+})
+</script>
+<script>
+
+
+
+</script>
+
+</html>
