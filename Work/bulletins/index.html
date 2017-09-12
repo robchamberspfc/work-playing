@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.ons.gov.uk/sixteens/81674c0/css/main.css">
+  <meta content="width=device-width,initial-scale=1.0,user-scalable=1" name="viewport">
+  <script src="https://www.google.com/jsapi"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+          <table><th>Bulletin</th><th>National statistic</th><tbody id = "bulletins"></table>
+  </div>
+
+</body>
+
+<script>
+  function reset() {
+    location.reload();
+  }
+
+  const bulletins = document.getElementById('bulletins');
+
+  function createNode(element) {
+    return document.createElement(element); // Create the type of element you pass in the parameters
+  }
+
+  function append(parent, el) {
+    return parent.appendChild(el); // Append the second parameter(element) to the first one
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+      fetch("https://www.ons.gov.uk/publications/data?sortBy=release_date&query=&filter=bulletin&size=500", {mode: 'cors'}).then(data => data.json()).then(function (data) {
+        //console.log (data)
+        return data.result.results.map(function (variations) {
+          //console.log (variations)
+            let tr = createNode('tr'),
+            td1 = createNode('td'),
+            td2 = createNode('td'),
+            span = createNode('span');
+            td1.innerHTML = "<a href = 'http://www.ons.gov.uk" + variations.uri + "'> " + variations.description.title + "</a>"
+            td2.innerHTML = variations.description.nationalStatistic
+            td2.align ="right"
+            append(tr, td1);
+          append(tr, td2);
+          append(bulletins, tr);
+
+        })
+    })
+});
+</script>
+
+</html>
