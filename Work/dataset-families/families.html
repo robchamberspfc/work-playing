@@ -78,6 +78,10 @@
 
     <script>
 
+
+  
+  
+
         function createNode(element) {
 				return document.createElement(element); // Create the type of element you pass in the parameters
 	    }
@@ -97,7 +101,10 @@
         const editions = document.getElementById('editions');
         let k = 0
         let bulletins = []
-        theme = "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours"
+        url=window.location.href 
+        theme = url.split('?')[1]
+        console.log (theme)
+        // theme = "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours"
         fetch (theme + "/data", {
             mode:'cors',
         })
