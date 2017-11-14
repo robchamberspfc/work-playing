@@ -118,7 +118,7 @@
             append(themeTitle, spanTitle);
             append(themeDesc, spanDesc);      
         })
-        fetch (theme + "/publications/data?filter=bulletin", {
+        fetch (theme + "/publications/data?filter=bulletin&size=100", {
             mode:'cors',
         })
         .then(data => {return data.json()})
