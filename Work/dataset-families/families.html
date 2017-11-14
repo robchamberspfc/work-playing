@@ -147,7 +147,7 @@
                 editionUpdate.classList.remove('subsection');
                 editionUpdate.classList.add('section');
                 subsection.style= 'display: none;';
-                fetch ("https://www.ons.gov.uk" + bulletins[k].uri + "/relateddata/data", {
+                fetch ("https://www.ons.gov.uk" + bulletins[k].uri + "/relateddata/data?&size=100", {
                         mode:'cors',
                          })
                          .then(data => {return data.json()})
