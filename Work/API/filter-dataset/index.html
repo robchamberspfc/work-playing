@@ -1,0 +1,47 @@
+<html>
+    
+<!-- {
+    "instance_id": "88b8a981-a548-4c01-8110-bf32fb2b1b3d",
+      "dimensions": [
+    
+      ]
+} -->
+
+<script>
+
+    var instanceID = "431ec767-4fc2-4e78-a103-ac7c2036a613"
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    });
+
+    var payload = '{"instance_id":"' + instanceID + '"}'
+    console.log (payload)
+
+    //console.log(uuid)
+
+    // fetch('https://www.uuidgenerator.net/api/guid.text', {
+    //         mode: 'no-cors'
+    //     })
+    // .then (function (response) {
+    //     console.log (response)
+    // })
+
+    fetch('http://localhost:22100/filters/6ce7286c-5407-4957-8023-8efb50d8ada0', {
+            mode: 'no-cors',
+            method: 'get',
+            // body: payload
+            // headers: {
+            //   'Authorization': 'Basic '+btoa('839567664643584:kwlgq3rwjF9_23LQ8yksqOvS6As')
+            // }
+        })
+        .then(function(res){ console.log(res) })
+        .catch(function(res){ console.log(res) })
+
+    
+
+</script>
+
+</html>

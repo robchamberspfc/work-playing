@@ -1,11 +1,22 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <title>Work playing</title>
-</head>
-<body>
-	<a href = "/Work/new-pattern/template.html">Template</a>
-     
-     
-</body>
+
+        <img src= "https://cdn.ons.gov.uk/assets/images/ons-logo/v2/ons-logo.svg" onLoad="myFunction()">
+        <h1 id = "demo" ></h1>
+<SCRIPT>
+
+function myFunction() {
+
+    try {
+        fetch('https://www.ons.gov.uk', "mode:cors")
+        console.log ("loaded")
+    }
+    catch(err) {
+    document.getElementById("demo").innerHTML = err.message;
+    }
+    
+}
+
+
+
+</SCRIPT>
 </html>
