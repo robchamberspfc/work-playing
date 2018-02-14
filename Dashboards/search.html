@@ -578,7 +578,7 @@ function getsearch() {
       let li = createNode('li');
       let h3 = createNode('h3');
       let p2 = createNode('p');
-      let p1 = createNode('p');
+      let p1 = createNode('div');
       let div = createNode('div');
 
 
@@ -587,11 +587,19 @@ function getsearch() {
       mm = d.getUTCMonth();
       yy = d.getUTCFullYear();
 
-      h3.innerHTML = "<a href = 'https://www.ons.gov.uk" + variations.uri + "'>" + variations.description.title + "</a>"
-      p2.innerHTML = "Dataset | Released on " + dd + "/" + mm + "/" + yy
-      p1.innerHTML = variations.description.summary
-      div.innerHTML = variations.description.keywords
+      if (variations.description.edition !== undefined){h3.innerHTML = "<a href = 'https://www.ons.gov.uk" + variations.uri + "'>" + variations.description.title + ": " + variations.description.edition +"</a>"}
+      else{h3.innerHTML = "<a href = 'https://www.ons.gov.uk" + variations.uri + "'>" + variations.description.title}
+    //   h3.innerHTML = "<a href = 'https://www.ons.gov.uk" + variations.uri + "'>" + variations.description.title + ": " + variations.description.edition +"</a>"
+      
+      
+      p2.innerHTML = variations.type + "| Released on " + dd + "/" + mm + "/" + yy
+    //   p1.innerHTML = variations.description.summary
+      
 
+      if (variations.description.summary !== undefined){p1.innerHTML = variations.description.summary}
+
+      if (variations.description.keywords !== undefined){div.innerHTML = "Keywords: " + variations.description.keywords}
+      
         append(li, h3);
         append(li, p2);
         append(li, p1);
