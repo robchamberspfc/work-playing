@@ -1,27 +1,11 @@
 <html>
     
-<!-- {
-    "instance_id": "88b8a981-a548-4c01-8110-bf32fb2b1b3d",
-      "dimensions": [
-    
-      ]
-} -->
 
 <script>
 
-    // var instanceID = "431ec767-4fc2-4e78-a103-ac7c2036a613"
-    // var d = new Date().getTime();
-    // var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    //     var r = (d + Math.random()*16)%16 | 0;
-    //     d = Math.floor(d/16);
-    //     return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-    // });
-
     var payload = '{"dataset":{"id": "cpih01","edition": "time-series","version": 6},"dimensions": [{"name": "geography","options": ["K02000001"]}]}'
 
-    let filterID = ""
     // fetch('http://localhost:23200/v1/filters?submitted=true', {
-
     fetch('https://api.dev.cmd.onsdigital.co.uk/v1/filters?submitted=true', {
             mode: 'cors',
             method: 'post',
@@ -32,9 +16,10 @@
         .then(function (res) {
         filterID = res.links.filter_output.id
         console.log(res)
+
+        wait(1000); 
         
         // fetch('http://localhost:23200/v1/filter-outputs/' + filterID, {
-
         fetch('https://api.dev.cmd.onsdigital.co.uk/v1/filter-outputs/' + filterID, {
             mode: 'cors',
             method: 'get',
@@ -42,14 +27,20 @@
 
             .then(data => data.json())
             .then(function (data) {
-        
-                console.log (data)
+
+                console.log (data.downloads.csv.href)
             
         })
     })
 
 
-
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
     
 
 </script>
