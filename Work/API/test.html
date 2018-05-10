@@ -19,11 +19,21 @@
     //set dataset ID
     const datasetID = "cpih01"
 
+    
     //set route domain to use
-    const host = "https://api.dev.cmd.onsdigital.co.uk"
+    // -------------
+    // live beta site
+    // const host = "https://api.ons.gov.uk"
+
+    // dev devsion of cmd
+    // const host = "https://api.dev.cmd.onsdigital.co.uk"
+    
+    // local version of API router
+    const host = "http://localhost:23200"
 
     //dimensions to append to the end of string (time wildcard mandatory)
     const dimensions = "time=*&aggregate=cpih1dim1A0&geography=K02000001"
+    console.log(dimensions)
 
     //start the script when the page loads
     document.addEventListener("DOMContentLoaded", function () {
@@ -85,7 +95,7 @@
                         title: {
                             enabled: false
                         },
-                        min: 0
+                        // min: 0
                     },
                     legend: {
                         enabled: false

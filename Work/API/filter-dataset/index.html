@@ -9,36 +9,46 @@
 
 <script>
 
-    var instanceID = "431ec767-4fc2-4e78-a103-ac7c2036a613"
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (d + Math.random()*16)%16 | 0;
-        d = Math.floor(d/16);
-        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-    });
+    // var instanceID = "431ec767-4fc2-4e78-a103-ac7c2036a613"
+    // var d = new Date().getTime();
+    // var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    //     var r = (d + Math.random()*16)%16 | 0;
+    //     d = Math.floor(d/16);
+    //     return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    // });
 
-    var payload = '{"instance_id":"' + instanceID + '"}'
-    console.log (payload)
+    var payload = '{"dataset":{"id": "cpih01","edition": "time-series","version": 6},"dimensions": [{"name": "geography","options": ["K02000001"]}]}'
 
-    //console.log(uuid)
+    let filterID = ""
+    // fetch('http://localhost:23200/v1/filters?submitted=true', {
 
-    // fetch('https://www.uuidgenerator.net/api/guid.text', {
-    //         mode: 'no-cors'
-    //     })
-    // .then (function (response) {
-    //     console.log (response)
-    // })
+    fetch('https://api.dev.cmd.onsdigital.co.uk/v1/filters?submitted=true', {
+            mode: 'cors',
+            method: 'post',
+            body: payload
 
-    fetch('http://localhost:22100/filters/6ce7286c-5407-4957-8023-8efb50d8ada0', {
-            mode: 'no-cors',
-            method: 'get',
-            // body: payload
-            // headers: {
-            //   'Authorization': 'Basic '+btoa('839567664643584:kwlgq3rwjF9_23LQ8yksqOvS6As')
-            // }
         })
-        .then(function(res){ console.log(res) })
-        .catch(function(res){ console.log(res) })
+        .then(res => res.json())
+        .then(function (res) {
+        filterID = res.links.filter_output.id
+        console.log(res)
+        
+        // fetch('http://localhost:23200/v1/filter-outputs/' + filterID, {
+
+        fetch('https://api.dev.cmd.onsdigital.co.uk/v1/filter-outputs/' + filterID, {
+            mode: 'cors',
+            method: 'get',
+        })
+
+            .then(data => data.json())
+            .then(function (data) {
+        
+                console.log (data)
+            
+        })
+    })
+
+
 
     
 
