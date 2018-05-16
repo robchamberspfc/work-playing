@@ -1,5 +1,7 @@
 <html>
 
+    <div id='title'></div>
+    <div id='link'></div>
 
 <script>
     function wait(ms) {
@@ -35,6 +37,10 @@
                 .then(function (data) {
                     //log the CSV URL
                     console.log(data.downloads.csv.href)
+                    let node = document.createElement("H1");                            // Create a <h1> node
+                    let textnode = document.createTextNode(data.downloads.csv.href);     // Create a text node
+                    node.appendChild(textnode);                                         // Append the text to <h1>
+                    document.getElementById("title").appendChild(node);
                 })
         })
 </script>
