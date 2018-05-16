@@ -1,13 +1,15 @@
 <html>
-
+    
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Additional Highcharts javascript config -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
 </head>
 
 <body>
     <!-- Add the chart to the DOM -->
-    <div id='chart'></div>
+    <div id='title'></div>
+    <div id='chart' style='max-width:600px'></div>
 </body>
 <script>
     //function to sort the array
@@ -19,22 +21,19 @@
     //set dataset ID
     const datasetID = "cpih01"
 
-    
     //set route domain to use
     // -------------
     // live beta site
     // const host = "https://api.ons.gov.uk"
 
     // dev devsion of cmd
-    // const host = "https://api.dev.cmd.onsdigital.co.uk"
-    
+    const host = "https://api.dev.cmd.onsdigital.co.uk"
+
     // local version of API router
-    const host = "http://localhost:23200"
+    //const host = "http://localhost:23200"
 
     //dimensions to append to the end of string (time wildcard mandatory)
     const dimensions = "time=*&aggregate=cpih1dim1A0&geography=K02000001"
-    console.log(dimensions)
-
     //start the script when the page loads
     document.addEventListener("DOMContentLoaded", function () {
         //use dataset id to call the dataset api
@@ -49,6 +48,12 @@
                 latestVersion = versionLink.split("/datasets/")[1]
                 //build the url to use to get the data
                 latestVersion = host + "/v1/datasets/" + latestVersion + "/observations?" + dimensions
+                    //set dataset name as page title
+                    datasetName = data.title
+                    let node = document.createElement("H1");                 // Create a <h1> node
+                    let textnode = document.createTextNode(datasetName);     // Create a text node
+                    node.appendChild(textnode);                              // Append the text to <h1>
+                    document.getElementById("title").appendChild(node);
                 getVersion(latestVersion)
             })
     })
@@ -65,9 +70,9 @@
                 //build a map of the dimensions
                 data.observations.map(function (data) {
                     //create a new field from the date to allow it to  be ordered
-                    sort = new Date("1-" + data.dimension.time.label)
+                    sort = new Date("1-" + data.dimensions.time.label)
                     //build an array with the 3 values we need and convert the value to a number
-                    let chartdata = [data.dimension.time.label, parseFloat(data.observation), sort]
+                    let chartdata = [data.dimensions.time.label, parseFloat(data.observation), sort]
                     //add these arrays to the timeseries array
                     timeseries.push(chartdata)
                 })
@@ -86,7 +91,7 @@
                         }
                     },
                     title: {
-                        text: "CPIH"
+                        text: null
                     },
                     yAxis: {
                         labels: {

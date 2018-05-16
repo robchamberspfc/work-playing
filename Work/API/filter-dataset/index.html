@@ -1,48 +1,42 @@
 <html>
-    
+
 
 <script>
+    function wait(ms) {
+        var start = new Date().getTime();
+        var end = start;
+        while (end < start + ms) {
+            end = new Date().getTime();
+        }
+    }
+    // const domain = "http://localhost:23200"
+    const domain = "https://api.dev.cmd.onsdigital.co.uk"
+    let query =
+        '{"dataset":{"id": "cpih01","edition": "time-series","version": 6},"dimensions": [{"name": "geography","options": ["K02000001"]}]}'
 
-    var payload = '{"dataset":{"id": "cpih01","edition": "time-series","version": 6},"dimensions": [{"name": "geography","options": ["K02000001"]}]}'
-
-    // fetch('http://localhost:23200/v1/filters?submitted=true', {
-    fetch('https://api.dev.cmd.onsdigital.co.uk/v1/filters?submitted=true', {
+    fetch(domain + '/v1/filters?submitted=true', {
             mode: 'cors',
             method: 'post',
-            body: payload
-
+            body: query
         })
         .then(res => res.json())
         .then(function (res) {
-        filterID = res.links.filter_output.id
-        console.log(res)
+            filterID = res.links.filter_output.id
 
-        wait(1000); 
-        
-        // fetch('http://localhost:23200/v1/filter-outputs/' + filterID, {
-        fetch('https://api.dev.cmd.onsdigital.co.uk/v1/filter-outputs/' + filterID, {
-            mode: 'cors',
-            method: 'get',
+            //arbitary wait for files to be created (in ms) 
+            wait(1000);
+
+            // fetch('http://localhost:23200/v1/filter-outputs/' + filterID, {
+            fetch(domain + '/v1/filter-outputs/' + filterID, {
+                    mode: 'cors',
+                    method: 'get',
+                })
+                .then(data => data.json())
+                .then(function (data) {
+                    //log the CSV URL
+                    console.log(data.downloads.csv.href)
+                })
         })
-
-            .then(data => data.json())
-            .then(function (data) {
-
-                console.log (data.downloads.csv.href)
-            
-        })
-    })
-
-
-function wait(ms){
-   var start = new Date().getTime();
-   var end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
-  }
-}
-    
-
 </script>
 
 </html>
