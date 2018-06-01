@@ -113,8 +113,16 @@ function getASHE(locationID, locationName) {
     })
     .then(data => data.json())
     .then(function (data) {
+
+        if (data.observations["0"].observation == "") {
+            value = data.observations["0"].metadata["Data marking"]
+            console.log (value)
+        } else {
+            value = "£" + data.observations["0"].observation
+        }
+
         let node = document.createElement("h5");
-        let textnode = document.createTextNode("£" + data.observations["0"].observation + " (+/- " + data.observations["0"].metadata["Coefficient of variation"] + "%)");
+        let textnode = document.createTextNode(value + " (+/- " + data.observations["0"].metadata["Coefficient of variation"] + "%)");
         node.appendChild(textnode);
         document.getElementById("totalEarnings").appendChild(node);
 
@@ -125,8 +133,16 @@ function getASHE(locationID, locationName) {
     })
     .then(data => data.json())
     .then(function (data) {
+
+        if (data.observations["0"].observation == "") {
+            value = data.observations["0"].metadata["Data marking"]
+            console.log (value)
+        } else {
+            value = "£" + data.observations["0"].observation
+        }
+
         let node = document.createElement("h5");
-        let textnode = document.createTextNode("£" + data.observations["0"].observation + " (+/- " + data.observations["0"].metadata["Coefficient of variation"] + "%)");
+        let textnode = document.createTextNode(value + " (+/- " + data.observations["0"].metadata["Coefficient of variation"] + "%)");
         node.appendChild(textnode);
         document.getElementById("femaleEarnings").appendChild(node);
 
@@ -137,8 +153,16 @@ function getASHE(locationID, locationName) {
     })
     .then(data => data.json())
     .then(function (data) {
+
+        if (data.observations["0"].observation == "") {
+            value = data.observations["0"].metadata["Data marking"]
+            console.log (value)
+        } else {
+            value = "£" + data.observations["0"].observation
+        }
+
         let node = document.createElement("h5");
-        let textnode = document.createTextNode("£" + data.observations["0"].observation + " (+/- " + data.observations["0"].metadata["Coefficient of variation"] + "%)");
+        let textnode = document.createTextNode(value + " (+/- " + data.observations["0"].metadata["Coefficient of variation"] + "%)");
         node.appendChild(textnode);
         document.getElementById("maleEarnings").appendChild(node);
 
