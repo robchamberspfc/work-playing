@@ -1,0 +1,34 @@
+
+<html>
+
+
+<script>
+const locationID = "K02000001"
+const geographyOption = "http://api.localhost:23200/v1/datasets/mid-year-pop-est/editions/time-series/versions/1/dimensions/geography/options"
+
+document.addEventListener("DOMContentLoaded", findPlaceName());
+
+
+function findPlaceName() {
+        //use dataset id to call the dataset api
+        fetch(geographyOption, {
+                mode: 'cors'
+            })
+            .then(data => data.json())
+            .then(function (data) {
+                nameLookup = ""
+                data.items.map(function (data) {
+                    // console.log (data.option)
+                    // console.log (data.label)
+                    if(data.option === locationID)
+                    placeLookup = data.label
+                
+                })
+                console.log(placeLookup)
+                return placeLookup
+            })
+}
+
+</script>
+
+</html>

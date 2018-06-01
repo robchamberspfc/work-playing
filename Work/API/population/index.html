@@ -1,0 +1,110 @@
+<html>
+    
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <!-- Add the chart to the DOM -->
+    <div id='title'></div>
+    <div id='number'></div>
+</body>
+<script>
+    //function to sort the array
+    function orderByDate(a, b) {
+        if (a[2] < b[2]) return -1;
+        if (a[2] > b[2]) return 1;
+        return 0;
+    }
+    //set dataset ID
+    const datasetID = "mid-year-pop-est"
+    const geographyOption = "http://api.localhost:23200/v1/datasets/mid-year-pop-est/editions/time-series/versions/1/dimensions/geography/options"
+    const locationID = "E06000022"
+    let placeLookup = ""
+
+    //set route domain to use
+    // -------------
+    // live beta site
+    const host = "https://api.beta.ons.gov.uk"
+
+    // dev devsion of cmd
+    // const host = "https://api.dev.cmd.onsdigital.co.uk"
+
+    // local version of API router
+    // const host = "http://localhost:23200"
+
+    //dimensions to append to the end of string (time wildcard mandatory)
+    const dimensions = "time=2016&age=*&sex=0&geography=" + locationID
+    //start the script when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        findPlaceName(placeLookup)
+        //use dataset id to call the dataset api
+        fetch(host + "/v1/datasets/" + datasetID, {
+                mode: 'cors'
+            })
+            .then(data => data.json())
+            .then(function (data) {
+                //get the link to the latest version from the response
+                let versionLink = data.links.latest_version.href
+                //split the URL to just get dataset, edition and version
+                latestVersion = versionLink.split("/datasets/")[1]
+                //build the url to use to get the data
+                latestVersion = host + "/v1/datasets/" + latestVersion + "/observations?" + dimensions
+                    //set dataset name as page title
+                    datasetName = data.title
+                    let H1 = document.createElement("H1");                 // Create a <h1> node
+                    let title = document.createTextNode(datasetName + ' for ' + placeLookup);     // Create a text node
+                    H1.appendChild(title);                              // Append the text to <h1>
+                    document.getElementById("title").appendChild(H1);
+                getVersion(latestVersion)
+            })
+    })
+    //get the data for the latest version and create the chart
+    function getVersion(latestVersion) {
+        //get the observation data from the built url
+        fetch(latestVersion, {
+                mode: 'cors'
+            })
+            .then(data => data.json())
+            .then(function (data) {
+                //create an variable to store age total
+                let age = 0
+                //build a map of the dimensions
+                data.observations.map(function (data) {
+                    //total the ages as no total provided
+                    age = age + Number(data.observation)
+
+
+                })
+
+                let node = document.createElement("H2");                 // Create a <h1> node
+                    let textnode = document.createTextNode(age);     // Create a text node
+                    node.appendChild(textnode);                              // Append the text to <h1>
+                    document.getElementById("number").appendChild(node);
+
+            })
+    }
+
+function findPlaceName() {
+        //use dataset id to call the dataset api
+        fetch(geographyOption, {
+                mode: 'cors'
+            })
+            .then(data => data.json())
+            .then(function (data) {
+                nameLookup = ""
+                data.items.map(function (data) {
+                    // console.log (data.option)
+                    // console.log (data.label)
+                    if(data.option === locationID)
+                    placeLookup = data.label
+                
+                })
+                console.log(placeLookup)
+                return placeLookup
+            })
+}
+
+</script>
+
+</html>

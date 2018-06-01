@@ -1,0 +1,266 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Additional Highcharts javascript config -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="//cdn.ons.gov.uk/sixteens/cb6733a/css/main.css">
+    <link href="https://cdn.ons.gov.uk/sixteens/658deeb/css/work-in-progress.css" rel="stylesheet" type="text/css">
+    <script src="cpi.js"></script>
+    <script src="localauth.js"></script>
+    <script src="wellbeing.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+</head>
+
+<body class="pl-home">
+    <header>
+        <a class="skiplink" href="#main" tabindex="0">
+            Skip to main content
+        </a>
+        <div id="pagePath" class="hide">/</div>
+        <div class="wrapper">
+            <div class="header col-wrap">
+                <div class="col col--lg-one-third col--md-one-third">
+                    <a href="/">
+                        <!--[if lte IE 8]>
+                                            <img class="logo" src="https://cdn.ons.gov.uk/assets/images/ons-logo/v2/ons-logo.png" alt="Office for National Statistics">
+                                        <![endif]-->
+                        <!--[if gte IE 9]><!-->
+                        <img class="logo" src="https://cdn.ons.gov.uk/assets/images/ons-logo/v2/ons-logo.svg" alt="Office for National Statistics">
+                        <!--[endif]---->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-intro background--astral padding-top-md--4">
+        <div class="pl-wrap__inner padding-top-sm--4">
+            <div class="wrapper">
+                <h1 class="page-intro__title page-intro__title--home-big">Customise My Data demo</h1>
+                <p class="page-intro__content width-lg--47">Examples of data driven by the new API</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="wrapper padding-top-md--4 padding-bottom-md--4">
+        <div class="col-wrap">
+
+            <div class="col col--md-two-thirds col--lg-two-thirds">
+                <div id='title'></div>
+            </div>
+        </div>
+
+        <div class="col-wrap">
+            <div class="col col--md-two-thirds col--lg-two-thirds">
+                <div id='chart' style='height:250px; width:95%'></div>
+            </div>
+            <div class="col col--md-one-third col--lg-one-third">
+                <h3>Percentage change over the last 12 months</h3>
+                <div class="box__content" id='keyCPIHFigure'></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="background--gallery padding-top-md--4 padding-bottom-md--3">
+        <div class="wrapper">
+            <h3>Get data for your area</h3>
+            <p>
+                <select class="js-example-basic-single" style="width:50%" id="places" onchange="getDataforRegion()">
+                    <option disabled selected>Select area</option>
+                </select>
+            </p>
+            <div class="col-wrap" id="hidden" style="display:none">
+                <div class="col col--md-half background--white padding-left--1 padding-right--1 padding-top--2 padding-bottom--2 col--lg-half">
+                    <h4 id="populationPlace">Population for </h4>
+                    <div class="col-wrap">
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <h5>Total:</h5>
+                        </div>
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <div id="totalPop">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-wrap">
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <h5>Female:</h5>
+                        </div>
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <div id="femalePop">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-wrap">
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <h5>Male:</h5>
+                        </div>
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <div id="malePop">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col--md-half background--white padding-left--1 padding-right--1 padding-top--2 padding-bottom--2 col--lg-half">
+                    <h4 id="ashePlace">Average earnings for </h4>
+                    <div class="col-wrap">
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <h5>Total:</h5>
+                        </div>
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <div id="totalEarnings">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-wrap">
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <h5>Female:</h5>
+                        </div>
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <div id="femaleEarnings">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-wrap">
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <h5>Male:</h5>
+                        </div>
+                        <div class="col col--md-one-quarter col--lg-one-quarter">
+                            <div id="maleEarnings">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <h3>Personal Well-being in the UK</h3>
+
+        <div class="col-wrap">
+            <div class="col col--md-half col--lg-half">
+                <h4>Anxiety</h4>
+                <p id = "anxiety" style='height:250px; width:95%'></p>
+            </div>
+            <div class="col col--md-half col--lg-half">
+                    <h4>Happiness</h4>
+                    <p id = "happiness" style='height:250px; width:95%'></p>
+            </div>
+        </div>
+        <div class="col-wrap">
+            <div class="col col--md-half col--lg-half">
+                    <h4>Worthwhile</h4>
+                    <p id = "worthwhile" style='height:250px; width:95%'></p>
+            </div>
+            <div class="col col--md-half col--lg-half">
+                    <h4>Life Satisfaction</h4>
+                    <p id = "life-satisfaction" style='height:250px; width:95%'></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="print--hide">
+        <h2 class="visuallyhidden">Footer links</h2>
+        <div class="footer">
+            <div class="wrapper">
+                <nav>
+                    <div class="footer-nav col-wrap">
+                        <div class="col col--lg-one-third col--md-one-third">
+                            <h3 class="footer-nav__heading">Help</h3>
+                            <ul class="footer-nav__list">
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/help/accessibility">Accessibility</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/help/cookiesandprivacy">Cookies and privacy</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/help/termsandconditions">Terms and conditions</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col col--lg-one-third col--md-one-third">
+                            <h3 class="footer-nav__heading">About ONS</h3>
+                            <ul class="footer-nav__list">
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/aboutus/whatwedo">What we do</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/aboutus/careers">Careers</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/aboutus/contactus">Contact us</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/news">News</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.ons.gov.uk/aboutus/transparencyandgovernance/freedomofinformationfoi">Freedom of Information</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col col--lg-one-third col--md-one-third">
+                            <h3 class="footer-nav__heading">Connect with us</h3>
+                            <ul class="footer-nav__list">
+                                <li class="footer-nav__item">
+                                    <a href="https://twitter.com/ONS">Twitter</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.facebook.com/ONS">Facebook</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://www.linkedin.com/company/office-for-national-statistics">LinkedIn</a>
+                                </li>
+                                <li class="footer-nav__item">
+                                    <a href="https://public.govdelivery.com/accounts/UKONS/subscribers/new">Email alerts</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="wrapper">
+                <div class="footer-license">
+                    <img class="footer-license__img" alt="OGL" width="60" src="https://www.ons.gov.uk/img/ogl.png">
+                    <p class="footer-license__text margin-left-sm--0">
+                        All content is available under the
+                        <a href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>, except where otherwise stated
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="viewport-sm" class="js-viewport-size"></div>
+        <div id="viewport-md" class="js-viewport-size"></div>
+        <div id="viewport-lg" class="js-viewport-size"></div>
+    </footer>
+</body>
+<script>
+    //function to sort the array
+    function orderByDate(a, b) {
+        if (a[2] < b[2]) return -1;
+        if (a[2] > b[2]) return 1;
+        return 0;
+    }
+    //set dataset ID
+    const datasetID = "cpih01"
+
+    document.addEventListener("DOMContentLoaded", function () {
+        loadCPIH()
+        populateLocations()
+        loadWellbeing()
+    })
+
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+    });
+
+    const host = "https://api.beta.ons.gov.uk"
+</script>
+
+</html>
