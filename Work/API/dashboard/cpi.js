@@ -72,6 +72,11 @@ function getVersion(latestVersion) {
                 legend: {
                     enabled: false
                 },
+                plotOptions: {
+                    series: {
+                        color: '#3B7A9E'
+                    }
+                },
                 xAxis: {
                     type: "category",
                     crosshair: true,
