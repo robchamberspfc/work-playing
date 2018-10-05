@@ -56,14 +56,14 @@ function getBulletin(data) {
         releaseData = data.description.releaseDate
             if(data.description.latestRelease != true){
                 if (data.alerts == null){
-                    console.log ("hello")
+                    // console.log ("hello")
                 }else {
-                console.log (data.alerts)
-                // console.log (data.description.releaseDate)
+                // console.log (data.alerts)
+                // console.log (data.description.nextRelease.toISOString())
                 let bulletinData = data;
                 bulletinData.description.releaseDate
                 correctionDate = data.alerts[0].date
-                console.log(data.alerts.length)
+                // console.log(data.alerts.length)
                 date2 = new Date(data.alerts[data.alerts.length-1].date)
                 locale = "en-us",
                 month = date2.toLocaleString(locale, { month: "long" });
