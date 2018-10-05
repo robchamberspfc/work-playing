@@ -1,6 +1,7 @@
-const dimensions = "time=*&aggregate=cpih1dim1A0&geography=K02000001"
-//start the script when the page loads
 function loadCPIH() {
+    //set dataset ID
+    let datasetID = "cpih01"
+    let dimensions = "time=*&aggregate=cpih1dim1A0&geography=K02000001"
     //use dataset id to call the dataset api
     fetch(host + "/v1/datasets/" + datasetID, {
             mode: 'cors'

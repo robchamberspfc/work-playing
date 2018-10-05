@@ -10,6 +10,7 @@
     <script src="cpi.js"></script>
     <script src="localauth.js"></script>
     <script src="wellbeing.js"></script>
+    <script src="cmdLink.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 
@@ -105,6 +106,7 @@
                             </div>
                         </div>
                     </div>
+                    <div id="mid-year-pop-est"></div>
                 </div>
                 <div class="col col--md-half background--white padding-left--1 padding-right--1 padding-top--2 padding-bottom--2 col--lg-half">
                     <h4 id="ashePlace">Average earnings for </h4>
@@ -135,6 +137,7 @@
                             </div>
                         </div>
                     </div>
+                    <div id="ashe-table-8-earnings"></div>
                 </div>
             </div>
         </div>
@@ -247,8 +250,6 @@
         if (a[2] > b[2]) return 1;
         return 0;
     }
-    //set dataset ID
-    const datasetID = "cpih01"
 
     document.addEventListener("DOMContentLoaded", function () {
         loadCPIH()
