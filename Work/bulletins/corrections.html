@@ -1,85 +1,75 @@
 <html>
 <!-- <body onload="getbulletin()"> -->
+
 <body>
-    <p>Go to <a href = "https://www.ons.gov.uk/publications?sortBy=release_date&query=&filter=bulletin&size=10" target="_blank">this URL</a> and edit the query to suit your needs, grab the URL and paste into search box to see the word counts of each bulletin</p>
+    <p>Go to <a href="https://www.ons.gov.uk/search?q=economy&sortBy=relevance&filter=bulletin&q=economy&size=250"
+            target="_blank">this URL</a> and edit the query to suit your needs, grab the URL and paste into search box</p>
     <input type="text" id="bulletinLinkInput" name="bulletins">
-        <button onclick="searchInput()">Search</button>
-        
-    <div id = "result">
+    <button onclick="searchInput()">Search</button>
+
+    <div id="result">
 
     </div>
 </body>
 <script>
+    const result = document.getElementById("result");
 
-const result = document.getElementById("result");
-
-function createNode(element) {
-      return document.createElement(element);
+    function createNode(element) {
+        return document.createElement(element);
     }
 
-function append(parent, el) {
-      return parent.appendChild(el);
-    } 
+    function append(parent, el) {
+        return parent.appendChild(el);
+    }
 
-function searchInput(name) {
-    bulletins = document.getElementById("bulletinLinkInput").value;
-    firstHalf = bulletins.split('?')[0]
-    secondHalf = bulletins.split('?')[1]
-    bulletins = firstHalf + "/data/?" + secondHalf 
-    bulletinList = bulletins
-    getBulletins()
-}
+    function searchInput(name) {
+        bulletins = document.getElementById("bulletinLinkInput").value;
+        firstHalf = bulletins.split('?')[0]
+        secondHalf = bulletins.split('?')[1]
+        bulletins = firstHalf + "/data/?" + secondHalf
+        bulletinList = bulletins
+        getBulletins()
+    }
 
-function getBulletins() {
-    fetch (bulletinList, {mode: "cors"}).then((data) => data.json()).then(function (data) {
-        let bulletinData = data;
-        let results = data.result.results.length
-        for  (var i = 0; i < results; i++){
-            getBulletin(data.result.results[i].uri)
-        }
-    })
-}
+    function getBulletins() {
+        fetch(bulletinList, {
+            mode: "cors"
+        }).then((data) => data.json()).then(function (data) {
+            let bulletinData = data;
+            let results = data.result.results.length
+            for (var i = 0; i < results; i++) {
+                getBulletin(data.result.results[i].uri)
+            }
+        })
+    }
 
-function getBulletin(data) {
-    fetch ("https://www.ons.gov.uk/" + data + "/data", {mode: "cors"}).then((data) => data.json()).then(function (data) {
-        // let bulletinData = data;
-        // let sections = data.sections.length;
-        // let totalWords = 0;
-        // for  (var i = 0; i < sections; i++){
-        // bulletinWords = bulletinData.sections[i].markdown.split(" ").length;
-        // totalWords = totalWords + bulletinWords
-        // }
-        // console.log (data.description.latestRelease)
-
-
-        // correctionDate = data.alerts[0].date
-        releaseData = data.description.releaseDate
-            if(data.description.latestRelease != true){
-                if (data.alerts == null){
-                    // console.log ("hello")
-                }else {
-                // console.log (data.alerts)
-                // console.log (data.description.nextRelease.toISOString())
-                let bulletinData = data;
-                bulletinData.description.releaseDate
-                correctionDate = data.alerts[0].date
-                // console.log(data.alerts.length)
-                date2 = new Date(data.alerts[data.alerts.length-1].date)
-                locale = "en-us",
-                month = date2.toLocaleString(locale, { month: "long" });
-                datePretty = date2.getDate()+' '+ month +' '+date2.getFullYear()
-                // console.log (datePretty)
+    function getBulletin(data) {
+        fetch("https://www.ons.gov.uk/" + data + "/data", {
+            mode: "cors"
+        }).then((data) => data.json()).then(function (data) {
+            releaseData = data.description.releaseDate
+            if (data.description.latestRelease != true) {
+                if (data.versions == null) {} else {
+                    if (data.versions.length > 0) {
+                        let bulletinData = data;
+                        bulletinData.description.releaseDate
+                        date2 = new Date(data.versions[data.versions.length - 1].updateDate)
+                        locale = "en-us",
+                            month = date2.toLocaleString(locale, {
+                                month: "long"
+                            });
+                        datePretty = date2.getDate() + ' ' + month + ' ' + date2.getFullYear()
                         p = createNode("p");
-                        p.innerHTML = "<a href = 'https://www.ons.gov.uk" + bulletinData.uri +"'>" + bulletinData.description.title + ": " + bulletinData.description.edition + "</a> - Last correction/alert date: " + datePretty + " - Next release: " + bulletinData.description.nextRelease
+                        p.innerHTML = "<a href = 'https://www.ons.gov.uk" + bulletinData.uri + "'>" +
+                            bulletinData.description.title + ": " + bulletinData.description.edition +
+                            "</a> - Last correction date: " + datePretty + " - Next release: " + bulletinData.description
+                            .nextRelease
                         append(result, p);
+                    }
+                }
             }
-            }
-
-
-
-    });
-}
-
+        });
+    }
 </script>
 
 </html>
