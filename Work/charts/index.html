@@ -1,0 +1,56 @@
+<html>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+  <script src="https://www.google.com/jsapi"></script>
+
+  <body>
+
+    <div id="test"></div>
+
+
+  </body>
+
+  <script>
+
+    const test = document.getElementById('test');
+
+    function createNode(element) {
+      return document.createElement(element); // Create the type of element you pass in the parameters
+    }
+
+    function append(parent, el) {
+      return parent.appendChild(el); // Append the second parameter(element) to the first one
+    }
+
+    fetch("https://www.ons.gov.uk/chartconfig?uri=/economy/grossdomesticproductgdp/bulletins/grossdomesticproductpreliminaryestimate/aprtojune2016/7a48492c", {mode: 'cors'}).then(function (data) {
+      console.log (data)
+
+      //console.log(timeSeriesDataMonths)
+      
+        datainnitmonths = []
+        timeSeriesDataMonths.map(function (timeSeriesDataMonths) {
+          date = timeSeriesDataMonths.date
+          value = timeSeriesDataMonths.value
+          chartdata = [
+            timeSeriesDataMonths.date,
+            parseFloat(timeSeriesDataMonths.value)
+          ]
+          datainnitmonths.push(chartdata)
+        });
+        Highcharts.chart('tsdm', {
+          series: [
+            {
+              data: datainnitmonths
+            }
+          ]
+        });
+      })
+
+  </script>
+  <script></script>
+
+</html>
