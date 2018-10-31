@@ -1,11 +1,12 @@
 <html>
 <!-- <body onload="getbulletin()"> -->
 
-<body>
-    <p>Go to <a href="https://www.ons.gov.uk/search?q=economy&sortBy=relevance&filter=bulletin&q=economy&size=250"
+<!-- <body> -->
+        <body onload="test();">
+    <!-- <p>Go to <a href="https://www.ons.gov.uk/search?q=economy&sortBy=relevance&filter=bulletin&q=economy&size=250"
             target="_blank">this URL</a> and edit the query to suit your needs, grab the URL and paste into search box</p>
     <input type="text" id="bulletinLinkInput" name="bulletins">
-    <button onclick="searchInput()">Search</button>
+    <button onclick="searchInput()">Search</button> -->
 
     <div id="result">
 
@@ -29,6 +30,20 @@
         bulletins = firstHalf + "/data/?" + secondHalf
         bulletinList = bulletins
         getBulletins()
+        test()
+    }
+
+    function test(){
+        const URL = "https://www.ons.gov.uk/publications/data?sortBy=title&query=&filter=bulletin&size=250"
+        fetch(URL, {
+            mode: "cors"
+        }).then((data) => data.json()).then(function (data) {
+            return data.result.results.map (function (variations) {
+                bulletinList = "https://www.ons.gov.uk/search/data?q=" + variations.description.title + "&sortBy=relevance&filter=bulletin&q=economy&size=250"
+                getBulletins()
+            })
+
+        })
     }
 
     function getBulletins() {
@@ -62,7 +77,7 @@
                         p = createNode("p");
                         p.innerHTML = "<a href = 'https://www.ons.gov.uk" + bulletinData.uri + "'>" +
                             bulletinData.description.title + ": " + bulletinData.description.edition +
-                            "</a> - Last correction date: " + datePretty + " - Next release: " + bulletinData.description
+                            "</a> splithere1 Last correction date: " + datePretty + " splithere2 Next release: " + bulletinData.description
                             .nextRelease
                         append(result, p);
                     }
